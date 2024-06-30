@@ -13,7 +13,7 @@ app.use('/api/v1', api);
 
 sequelize.authenticate()
     .then(() => {
-        sequelize.sync({ force: true })
+        sequelize.sync({ force: false })
             .then(() => {
                 console.log('데이터베이스 동기화 성공')
                 app.listen(port, () => {

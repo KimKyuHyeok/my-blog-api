@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const MainCategoryService = require('./main-category.service');
 const MainCategory = require('../../models/main-category.model');
 
 const mainCategoryRouter = Router();
@@ -19,5 +18,20 @@ mainCategoryRouter.post('/add', async (req, res) => {
         res.status(400);
     }
 });
+
+mainCategoryRouter.get('/list', async (req, res) => {
+
+    await MainCategory.findAll({
+        order: [['title', 'DESC']]
+    })
+        .then(result => {
+            console.log('TEST : ', result);
+            res.json(result);
+        })
+        .catch(err => {
+            console.log('[API] Main Category (list) 에러 : ', err);
+            res.status(400);
+        })
+})
 
 module.exports = mainCategoryRouter;
