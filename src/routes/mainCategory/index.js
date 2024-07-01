@@ -22,25 +22,6 @@ mainCategoryRouter.post('/add', async (req, res) => {
 });
 
 mainCategoryRouter.get('/list', async (req, res) => {
-
-    await MainCategory.findAll({
-        include: [
-            {
-                model: SubCategory,
-                include: {
-                    model: Posts
-                }
-            }
-        ],
-        order: [['title', 'DESC']],
-    })
-        .then(result => {
-            res.json(result).status(200);
-        })
-        .catch(err => {
-            console.log('[API] Main Category (list) 에러 : ', err);
-            res.status(400);
-        })
 })
 
 module.exports = mainCategoryRouter;

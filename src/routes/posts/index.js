@@ -1,7 +1,18 @@
 const { Router } = require('express');
 const Posts = require('../../models/posts.model');
+const categoryService = require('../../service/category.service');
+const postsService = require('../../service/posts.service');
 
 const postsRouter = Router();
+
+postsRouter.get('/', async(req, res) => {
+    const categories = await categoryService.sideMenuList();
+    const firstPost = await postsService.firstPost();
+    res.render('index', {
+        categories: categories,
+        firstPost: firstPost
+    });
+})
 
 postsRouter.post('/add', async(req, res) => {
     const {title, content, subId} = req.body;
