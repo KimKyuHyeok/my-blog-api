@@ -19,7 +19,7 @@ const Posts = sequelize.define('posts', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    comment: {
+    content: {
         type: DataTypes.STRING,
         allowNull: false,
     },
