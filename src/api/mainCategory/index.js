@@ -1,5 +1,7 @@
 const { Router } = require('express');
 const MainCategory = require('../../models/main-category.model');
+const SubCategory = require('../../models/sub-category.model');
+const Posts = require('../../models/posts.model');
 
 const mainCategoryRouter = Router();
 
@@ -22,7 +24,15 @@ mainCategoryRouter.post('/add', async (req, res) => {
 mainCategoryRouter.get('/list', async (req, res) => {
 
     await MainCategory.findAll({
-        order: [['title', 'DESC']]
+        include: [
+            {
+                model: SubCategory,
+                include: {
+                    model: Posts
+                }
+            }
+        ],
+        order: [['title', 'DESC']],
     })
         .then(result => {
             console.log('TEST : ', result);
