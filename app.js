@@ -1,15 +1,19 @@
 const express = require('express');
-const api = require('./src/api/index.js');
+const api = require('./src/routes/index.js');
 const sequelize = require('./src/config/db.js');
+const path = require('path')
 const app = express();
 
 const port = 8000;
 
 /* Options */
 app.use(express.json());
+app.set('view engine', 'ejs');
+app.set('views', './views');
+app.use(express.static(path.join(__dirname, './views/css')));
 
 /* Router */
-app.use('/api/v1', api);
+app.use(api);
 
 sequelize.authenticate()
     .then(() => {
