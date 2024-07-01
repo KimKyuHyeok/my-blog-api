@@ -1,0 +1,49 @@
+.submenu {
+    display: none; /* 초기에는 숨김 상태 */
+}
+
+.submenu.active {
+    display: block; /* 토글 시 보이도록 변경 */
+}
+
+.posts {
+    display: none; /* 초기에는 숨김 상태 */
+    margin-left: 20px; /* 서브메뉴와 구분하기 위한 간격 설정 */
+}
+
+.posts.active {
+    display: block; /* 토글 시 보이도록 변경 */
+}
+
+.main {
+    margin-top: 3%;
+    display: flex;
+}
+
+.post-tap, .side-tap {
+    flex-direction: column;
+}
+
+.post-tap {
+    width: 70%;
+    background-color: yellow;
+}
+
+.post-tap {
+    padding: 20px; /* 상하좌우 20px 여백 설정 */
+}
+
+.post {
+    padding: 20px; /* 상하좌우 20px 여백 설정 */
+}
+
+.side-tap {
+    padding: 20px; /* 상하좌우 20px 여백 설정 */
+}
+
+
+
+.side-tap {
+    width: 30%;
+    background-color: blanchedalmond;
+}

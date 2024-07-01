@@ -1,0 +1,16 @@
+<div class="post">
+    <div class="title"><h2><%= firstPost.title %></h2></div>
+    <div class="createdAt"><%= formatDate(firstPost.createdAt) %></div>
+    <div class="content"><%= firstPost.content %></div>
+</div>
+
+<% 
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+
+        return `${year}년 ${month}월 ${day}일`
+    }
+ %>

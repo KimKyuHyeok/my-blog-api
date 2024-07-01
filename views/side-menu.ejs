@@ -1,0 +1,15 @@
+<% data.forEach(mainCategory => { %>
+    <div class="menu">
+        <div class="menu-toggle" onclick="toggleMenu(this)"><%= mainCategory.title %></div>
+            <div class="submenu">
+                <% mainCategory.subCategories.forEach(subCategory => { %>
+                    <li class="sub-toggle" onclick="toggleSubMenu(this)"><%= subCategory.title %></li>
+                    <ul class="posts">
+                        <% subCategory.posts.forEach(posts => { %>
+                            <li><a href="/posts/<%= posts.id %>"><%= posts.title %></a></li>
+                        <% })%>
+                    </ul>
+                <% })%>
+            </div>
+    </div>
+<% })%>
