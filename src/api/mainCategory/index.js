@@ -35,8 +35,7 @@ mainCategoryRouter.get('/list', async (req, res) => {
         order: [['title', 'DESC']],
     })
         .then(result => {
-            console.log('TEST : ', result);
-            res.json(result);
+            res.json(result).status(200);
         })
         .catch(err => {
             console.log('[API] Main Category (list) 에러 : ', err);
