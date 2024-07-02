@@ -1,9 +1,15 @@
 .submenu {
-    display: none; /* 초기에는 숨김 상태 */
+    width: 100%; /* submenu를 menu-toggle 아래에 배치 */
+    display: none; /* 기본적으로 숨김 */
+    flex-direction: column; /* 세로 정렬 */
 }
 
 .submenu.active {
-    display: block; /* 토글 시 보이도록 변경 */
+    display: flex; /* 토글 시 보이도록 변경 */
+}
+
+.menu-toggle {
+    flex: 1;
 }
 
 .posts {
@@ -29,21 +35,47 @@
     background-color: yellow;
 }
 
-.post-tap {
+.createdAt, .content {
+    padding: 10px;
+}
+
+.side-tap, .title, .post, .post-tap {
     padding: 20px; /* 상하좌우 20px 여백 설정 */
 }
 
-.post {
-    padding: 20px; /* 상하좌우 20px 여백 설정 */
+.post-top-banner {
+    background-color: cornsilk;
 }
-
-.side-tap {
-    padding: 20px; /* 상하좌우 20px 여백 설정 */
-}
-
-
 
 .side-tap {
     width: 30%;
     background-color: blanchedalmond;
+}
+
+.menu-toggle:hover, .sub-toggle:hover, .post-detail:hover {
+    font-weight: bolder;
+}
+
+
+.sub-toggle, .post-detail {
+    list-style-type: none;
+    margin-left: 15px;
+}
+
+.sub-toggle, .main-menu {
+    display: flex;
+    align-items: center;
+}
+
+.post-detail>a {
+    color: black;
+    text-decoration: none;
+}
+
+.main-menu {
+    display: flex;
+}
+
+.menu>img {
+    padding-right: 10px;
 }
