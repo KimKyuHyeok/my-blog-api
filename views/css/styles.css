@@ -72,10 +72,23 @@
     text-decoration: none;
 }
 
-.main-menu {
+.main-menu, .sub-table {
     display: flex;
 }
 
 .menu>img {
     padding-right: 10px;
+}
+
+.main-category, .main-category-add {
+    align-items: center;
+    justify-self: center
+}
+
+.table {
+    width: 50%;
+}
+
+.sub-title-td {
+    width: 40%;
 }

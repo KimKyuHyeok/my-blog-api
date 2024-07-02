@@ -1,0 +1,59 @@
+<%- include('../header.ejs') %>
+    <div class="admin-main">
+        <div class="main-category vstack gap-3">
+            <table class="table main-table">
+            <% mainCategoryList.forEach(mainCategory => { %>
+                <tr>
+                <td class="table-warning">
+                    <%= mainCategory.title %>
+                    <button class="btn btn-outline-primary btn-sm">E</button>
+                    <button class="btn btn-outline-danger btn-sm">D</button>
+                </td>
+                </tr>
+            <% }) %>
+            </table>
+        </div>
+        <div class="main-category-add">
+            <form action="/admin/mainCategory/add" method="POST">
+                <input type="text" name="title" id="title">
+                <button class="btn btn-primary btn-sm" type="submit">생성</button>
+            </form>
+        </div>
+    </div>
+    <div class="admin-sub">
+        <div>
+            <table class="table sub-table">
+                <tbody>
+            <% subCategoryList.forEach(mainCategory => { %>
+                <tr class="table-primary">
+                    <th class="table-primary"><%= mainCategory.title %></th>
+                    <% mainCategory.subCategories.forEach(subCategory => { %>
+                        <td class="table-secondary sub-title-td">
+                            <%= subCategory.title %>
+                            <button class="btn btn-outline-primary btn-sm">E</button>
+                            <button class="btn btn-outline-danger btn-sm">D</button>
+                        </td>
+                    <% }) %>
+                </tr>
+
+            <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <div class="sub-category-add">
+            <form action="/admin/subCategory/add" method="POST">
+                <select name="mainId" class="form-select" aria-label="Default select example">
+                    <option selected>메인 카테고리 선택</option>
+                    <% subCategoryList.forEach(mainCategory => { %>
+                    <option value="<%= mainCategory.id %>"><%= mainCategory.title %></option>
+                    <% }) %>
+                </select>
+                <input type="text" name="title" id="title">
+                <button class="btn btn-primary btn-sm" type="submit">생성</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+<%- include('../footer.ejs') %>
