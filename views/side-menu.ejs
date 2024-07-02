@@ -1,15 +1,27 @@
 <% data.forEach(mainCategory => { %>
     <div class="menu">
-        <div class="menu-toggle" onclick="toggleMenu(this)"><%= mainCategory.title %></div>
-            <div class="submenu">
-                <% mainCategory.subCategories.forEach(subCategory => { %>
-                    <li class="sub-toggle" onclick="toggleSubMenu(this)"><%= subCategory.title %></li>
-                    <ul class="posts">
-                        <% subCategory.posts.forEach(posts => { %>
-                            <li><a href="/posts/<%= posts.id %>"><%= posts.title %></a></li>
-                        <% })%>
-                    </ul>
-                <% })%>
+        <div class="main-menu">
+            <img src="/images/right-image.png" class="main-right-image" style="height: 13px;">
+            <div class="menu-toggle" onclick="toggleMenu(this)">
+                <%= mainCategory.title %>(<%= mainCategory.subCategories.length %>)
             </div>
+        </div>
+
+        <div class="submenu">
+            <% mainCategory.subCategories.forEach(subCategory => { %>
+                <div class="sub-toggle" onclick="toggleSubMenu(this)">
+                    <img src="/images/right-image.png" class="main-right-image" style="height: 13px;">
+                    <%= subCategory.title %>(<%= subCategory.posts.length %>)
+                </div>
+                <div class="posts">
+                    <% subCategory.posts.forEach(posts => { %>
+                        <div class="post-detail">
+                            <a href="/posts/<%= posts.id %>"><%= posts.title %></a>
+                        </div>
+                    <% }) %>
+                </div>
+            <% }) %>
+        </div>
+
     </div>
-<% })%>
+<% }) %>

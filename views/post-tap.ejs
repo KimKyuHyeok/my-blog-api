@@ -1,7 +1,13 @@
 <div class="post">
-    <div class="title"><h2><%= firstPost.title %></h2></div>
-    <div class="createdAt"><%= formatDate(firstPost.createdAt) %></div>
-    <div class="content"><%= firstPost.content %></div>
+    <div class="post-top-banner">
+        <div class="title"><h2><%= firstPost.title %></h2></div>
+        <div class="createdAt">
+            <span><%= formatDate(firstPost.createdAt) %></span>
+        </div>
+    </div>
+    <div class="content">
+        <span><%= firstPost.content %></span>
+    </div>
 </div>
 
 <% 
