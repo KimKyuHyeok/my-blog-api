@@ -14,6 +14,17 @@ const postsService = {
         }
     },
 
+    selectPost: async(postId) => {
+        try {
+            const result = await Posts.findOne({
+                where: {id: postId}
+            });
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    },
+
     createPost: async (title, content, mainId, subId) => {
         await Posts.create({
             title: title,

@@ -1,0 +1,14 @@
+<%- include('./header.ejs') %>
+    <div class="main">
+        <div class="post-tap">
+            <%- include('./post-tap.ejs', { firstPost: post }) %>
+        </div>
+
+        <div class="side-tap">
+            <%- include('./side-menu.ejs', { data: categories }) %>
+        </div>
+    </div>
+
+</body>
+
+<%- include('./footer.ejs') %>
