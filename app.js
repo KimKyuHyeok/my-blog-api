@@ -1,7 +1,9 @@
 const express = require('express');
 const api = require('./src/routes/index.js');
 const sequelize = require('./src/config/db.js');
-const path = require('path')
+const path = require('path');
+const bodyParser = require('body-parser');
+const session = require('express-session');
 const app = express();
 
 const port = 8000;
@@ -12,6 +14,13 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express.static(path.join(__dirname, './views')));
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: true,
+}));
+
 
 /* Router */
 app.use(api);
