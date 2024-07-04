@@ -34,6 +34,22 @@ const categoryService = {
         }
     },
 
+    selectMainCategory: async(mainId) => {
+        const subCategories = await SubCategory.findAll({
+            where: { mainId: mainId }
+        });
+
+        return subCategories.length;
+    },
+
+    selectSubCategoryList: async(mainId) => {
+        const subCategoryList = await SubCategory.findAll({
+            where: { mainId: mainId }
+        });
+
+        return subCategoryList;
+    },
+
     subCategoryList: async() => {
         try {
             const result = await MainCategory.findAll({
@@ -61,6 +77,44 @@ const categoryService = {
             title: title,
             mainId: mainId
         });
+    },
+
+    updateMainCategory: async(title, mainId) => {
+        await MainCategory.update(
+            {
+            title: title
+            },
+            {
+                where: {
+                    id: mainId
+                }
+            }
+        )
+    },
+
+    updateSubCategory: async(title, subId) => {
+        await SubCategory.update(
+            {
+                title: title
+            },
+            {
+                where: {
+                    id: subId
+                }
+            }
+        )
+    },
+
+    deleteMainCategory: async(mainId) => {
+        await MainCategory.destroy({
+            where: { id: mainId }
+        })
+    },
+
+    deleteSubCategory: async(subId) => {
+        await SubCategory.destroy({
+            where: { id: subId }
+        })
     }
 };
 
