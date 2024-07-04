@@ -1,46 +1,30 @@
 <%- include('../header.ejs') %>
-    <div class="admin-main">
-        <div class="main-category vstack gap-3">
-            <table class="table main-table">
-            <% mainCategoryList.forEach(mainCategory => { %>
-                <tr>
-                <td class="table-warning">
-                    <%= mainCategory.title %>
-                    <button class="btn btn-outline-primary btn-sm">E</button>
-                    <button class="btn btn-outline-danger btn-sm">D</button>
-                </td>
-                </tr>
-            <% }) %>
-            </table>
-        </div>
+    <div>
+        <button onclick="location.href='/admin/write'" class="btn btn-outline-success write-btn">포스터 작성하기</button>
         <div class="main-category-add">
+            <h5>메인 카테고리 추가</h5>
             <form action="/admin/mainCategory/add" method="POST">
-                <input type="text" name="title" id="title">
-                <button class="btn btn-primary btn-sm" type="submit">생성</button>
+                <input type="text" name="title">
+                <button class="btn btn-primary btn-sm" type="submit">추가</button>
             </form>
         </div>
-    </div>
-    <div class="admin-sub">
-        <div>
-            <table class="table sub-table">
-                <tbody>
-            <% subCategoryList.forEach(mainCategory => { %>
-                <tr class="table-primary">
-                    <th class="table-primary"><%= mainCategory.title %></th>
-                    <% mainCategory.subCategories.forEach(subCategory => { %>
-                        <td class="table-secondary sub-title-td">
-                            <%= subCategory.title %>
-                            <button class="btn btn-outline-primary btn-sm">E</button>
-                            <button class="btn btn-outline-danger btn-sm">D</button>
-                        </td>
+        <div class="main-category-update">
+            <h5>메인 카테고리 수정</h5>
+            <form id="mainForm" method="POST">
+                <select name="mainId" class="form-select" aria-label="Default select example">
+                    <option selected>메인 카테고리 선택</option>
+                    <% mainCategoryList.forEach(mainCategory => { %>
+                    <option value="<%= mainCategory.id %>"><%= mainCategory.title %></option>
                     <% }) %>
-                </tr>
-
-            <% }) %>
-                </tbody>
-            </table>
+                </select>
+                <input type="text" name="title" id="title">
+                <button class="btn btn-warning btn-sm" onclick="submitForm('/admin/mainCategory/update')">수정</button>
+                <button class="btn btn-danger btn-sm" onclick="submitForm('/admin/mainCategory/delete')">삭제</button>
+            </form>
         </div>
+        
         <div class="sub-category-add">
+            <h5>서브 카테고리 추가</h5>
             <form action="/admin/subCategory/add" method="POST">
                 <select name="mainId" class="form-select" aria-label="Default select example">
                     <option selected>메인 카테고리 선택</option>
@@ -52,7 +36,33 @@
                 <button class="btn btn-primary btn-sm" type="submit">생성</button>
             </form>
         </div>
-    </div>
+
+        <div class="sub-category-update">
+            <h5>서브 카테고리 수정</h5>
+            <form method="POST">
+                <select name="mainId" id="mainSelect" class="form-select" aria-label="Default select example">
+                    <option selected>서브 카테고리 선택</option>
+                    <% subCategoryList.forEach(mainCategory => { %>
+                        <% mainCategory.subCategories.forEach(subCategory => { %>
+                    <option value="<%= subCategory.id %>"><%= subCategory.title %></option>
+
+                        <% }) %>
+                    <% }) %>
+                </select>
+                <input type="text" name="title" id="title">
+                <button class="btn btn-warning btn-sm" onclick="submitForm('/admin/subCategory/update')">수정</button>
+                <button class="btn btn-danger btn-sm" onclick="submitForm('/admin/subCategory/delete')">삭제</button>
+            </form>
+        </div>
+</div>
+
+<script>
+    function submitForm(action) {
+        var form = document.getElementById('mainForm');
+        form.action = action;
+        form.submit();
+    }
+</script>
 
 </body>
 
