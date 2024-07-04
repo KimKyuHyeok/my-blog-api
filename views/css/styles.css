@@ -32,11 +32,20 @@
 
 .post-tap {
     width: 70%;
-    background-color: yellow;
+    background-color: #ECEFF7;
 }
 
 .createdAt, .content {
     padding: 10px;
+}
+
+.content {
+    margin-top: 40px;
+    background-color: white;
+}
+
+.content code {
+    background-color: rgb(194, 181, 181);
 }
 
 .side-tap, .title, .post, .post-tap {
@@ -44,7 +53,7 @@
 }
 
 .post-top-banner {
-    background-color: cornsilk;
+    background-color: white;
 }
 
 .side-tap {
@@ -80,15 +89,27 @@
     padding-right: 10px;
 }
 
-.main-category, .main-category-add {
-    align-items: center;
-    justify-self: center
-}
-
 .table {
     width: 50%;
 }
 
 .sub-title-td {
     width: 40%;
+}
+
+.admin-main, .admin-sub {
+    display: flex;
+}
+
+.table-primary>td{
+    white-space: nowrap;
+}
+
+.main-category-add, .main-category-update, .sub-category-add, .sub-category-update {
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.write-btn {
+    margin-left: 10px;
 }

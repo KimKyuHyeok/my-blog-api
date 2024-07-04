@@ -1,10 +1,10 @@
 <%- include('../header.ejs') %>
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <div>
-    <form id="mainForm" method="POST">
+    <form id="postForm" action="/admin/post/add" method="POST">
         <select name="mainId" class="form-select" id="mainSelect">
             <option selected>메인 카테고리 선택</option>
-            <%  mainCategoryList.forEach(mainCategory => { %>
+            <% mainCategoryList.forEach(mainCategory => { %>
             <option value="<%= mainCategory.id %>"><%= mainCategory.title %></option>
             <% }) %>
         </select>
@@ -15,20 +15,27 @@
             <span class="input-group-text" id="inputGroup-sizing-default">제목</span>
             <input type="text" class="form-control" name="title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
         </div>
-        <div id="content"></div>
+        <div id="editorContainer"></div>
+        <textarea name="content" id="hiddenContent" style="display:none;"></textarea>
+        <button class="btn btn-primary btn-sm" type="submit">작성</button>
+    </form>
 
-        <script>
-            const editor = new toastui.Editor({
-            el: document.querySelector('#content'), // 에디터를 적용할 요소 (컨테이너)
+    <script>
+        const editor = new toastui.Editor({
+            el: document.querySelector('#editorContainer'), // 에디터를 적용할 요소 (컨테이너)
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
             initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
             initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
             previewStyle: 'vertical'                // 마크다운 프리뷰 스타일 (tab || vertical)
         });
-        </script>
 
+        // Add submit event listener to form
+        document.getElementById('postForm').addEventListener('submit', function(event) {
+            console.log("EDIT >> ", editor);
+            document.getElementById('hiddenContent').value = editor.getHTML();
 
-
+        });
+    </script>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -38,7 +45,7 @@
             type: 'GET',
             data: { mainId: mainId },
             success: function(response) {
-                var subSelect = $('#subSelect')
+                var subSelect = $('#subSelect');
                 subSelect.empty();
 
                 if (response && response.length > 0) {
@@ -57,7 +64,7 @@
             error: function(error) {
                 console.error('Error fetching sub-categories:', error);
             }
-        })
+        });
     }
 
     $('#mainSelect').on('change', function() {
