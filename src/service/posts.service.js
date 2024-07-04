@@ -12,6 +12,14 @@ const postsService = {
         } catch (err) {
             throw err;
         }
+    },
+
+    createPost: async (title, content, mainId, subId) => {
+        await Posts.create({
+            title: title,
+            content: content,
+            subId: subId
+        });
     }
 };
 
