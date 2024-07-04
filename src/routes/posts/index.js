@@ -37,8 +37,6 @@ postsRouter.post('/add', async(req, res) => {
 postsRouter.get('/:id', async(req, res) => {
     const postId = req.params.id;
 
-    console.log("TEST : ", postId);
-
     Posts.findOne({
         where: {
             id: postId,

@@ -8,9 +8,9 @@ const adminRouter = Router();
 
 adminRouter.post('/password', async(req, res, next) => {
     const password = req.body.password;
-    const pw = '1234';
+    const confirm = process.env.ADMIN_PASSWORD;
 
-    if (password === pw) {
+    if (password === confirm) {
         req.session.authenticated = true;
         res.redirect('/admin');
     } else {
@@ -97,7 +97,7 @@ adminRouter.get('/select/subCategory', isAuth, async(req, res) => {
 
 adminRouter.post('/post/add', isAuth, async(req, res) => {
     const { title, content, mainId, subId } = req.body;
-    
+
     try {
         await postsService.createPost(title, content, mainId, subId);
 
