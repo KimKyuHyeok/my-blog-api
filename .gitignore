@@ -1,3 +1,4 @@
 node_modules
 package-lock.json
 .env
+my-blog-keypair.pem
