@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const app = express();
 
-const port = 8000;
+const port = 80;
 
 /* Options */
 app.use(express.json());
