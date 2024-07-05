@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'KimjungchulMyungjo-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/KimjungchulMyungjo-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 .submenu {
     width: 100%; /* submenu를 menu-toggle 아래에 배치 */
     display: none; /* 기본적으로 숨김 */
@@ -31,7 +38,7 @@
 }
 
 .post-tap {
-    width: 70%;
+    width: 80%;
     background-color: #ECEFF7;
 }
 
@@ -40,6 +47,7 @@
 }
 
 .content {
+    height: 100%;
     margin-top: 40px;
     background-color: white;
 }
@@ -57,8 +65,10 @@
 }
 
 .side-tap {
-    width: 30%;
-    background-color: blanchedalmond;
+    float: right;
+    width: 20%;
+    height: 850px;
+    border:1px solid gray;
 }
 
 .menu-toggle:hover, .sub-toggle:hover, .post-detail:hover {

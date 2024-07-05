@@ -4,7 +4,7 @@
         <div class="main-menu">
             <img src="/images/right-image.png" class="main-right-image" style="height: 13px;">
             <div class="menu-toggle" onclick="toggleMenu(this)">
-                <%= mainCategory.title %>(<%= mainCategory.subCategories.length %>)
+                <%= mainCategory.title %> (<%= mainCategory.subCategories.length %>)
             </div>
         </div>
 
@@ -12,7 +12,7 @@
             <% mainCategory.subCategories.forEach(subCategory => { %>
                 <div class="sub-toggle" onclick="toggleSubMenu(this)">
                     <img src="/images/right-image.png" class="main-right-image" style="height: 13px;">
-                    <%= subCategory.title %>(<%= subCategory.posts.length %>)
+                    <%= subCategory.title %> (<%= subCategory.posts.length %>)
                 </div>
                 <div class="posts">
                     <% subCategory.posts.forEach(posts => { %>

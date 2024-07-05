@@ -39,19 +39,18 @@
 
         <div class="sub-category-update">
             <h5>서브 카테고리 수정</h5>
-            <form method="POST">
-                <select name="mainId" id="mainSelect" class="form-select" aria-label="Default select example">
+            <form method="POST" id="subForm">
+                <select name="subId" class="form-select" aria-label="Default select example">
                     <option selected>서브 카테고리 선택</option>
                     <% subCategoryList.forEach(mainCategory => { %>
                         <% mainCategory.subCategories.forEach(subCategory => { %>
                     <option value="<%= subCategory.id %>"><%= subCategory.title %></option>
-
                         <% }) %>
                     <% }) %>
                 </select>
                 <input type="text" name="title" id="title">
-                <button class="btn btn-warning btn-sm" onclick="submitForm('/admin/subCategory/update')">수정</button>
-                <button class="btn btn-danger btn-sm" onclick="submitForm('/admin/subCategory/delete')">삭제</button>
+                <button class="btn btn-warning btn-sm" onclick="submitSubForm('/admin/subCategory/update')">수정</button>
+                <button class="btn btn-danger btn-sm" onclick="submitSubForm('/admin/subCategory/delete')">삭제</button>
             </form>
         </div>
 </div>
@@ -59,6 +58,12 @@
 <script>
     function submitForm(action) {
         var form = document.getElementById('mainForm');
+        form.action = action;
+        form.submit();
+    }
+
+    function submitSubForm(action) {
+        var form = document.getElementById('subForm');
         form.action = action;
         form.submit();
     }
