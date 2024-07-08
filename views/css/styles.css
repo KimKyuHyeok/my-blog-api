@@ -16,7 +16,7 @@
 
 .post-tap {
     width: 80%;
-    background-color: #ECEFF7;
+    background-color: #f5f5f5;
 }
 
 .createdAt, .content {
@@ -38,14 +38,14 @@
 }
 
 .post-top-banner {
-    background-color: white;
+    background-color: #f5f5f5;
 }
 
 .side-tap {
     float: right;
     width: 20%;
     height: 850px;
-    border:1px solid gray;
+    border-left: 1px solid gray;
 }
 
 .menu-toggle:hover, .sub-toggle:hover, .post-detail:hover {
