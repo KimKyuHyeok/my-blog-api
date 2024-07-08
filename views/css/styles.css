@@ -5,29 +5,6 @@
     font-style: normal;
 }
 
-.submenu {
-    width: 100%; /* submenu를 menu-toggle 아래에 배치 */
-    display: none; /* 기본적으로 숨김 */
-    flex-direction: column; /* 세로 정렬 */
-}
-
-.submenu.active {
-    display: flex; /* 토글 시 보이도록 변경 */
-}
-
-.menu-toggle {
-    flex: 1;
-}
-
-.posts {
-    display: none; /* 초기에는 숨김 상태 */
-    margin-left: 20px; /* 서브메뉴와 구분하기 위한 간격 설정 */
-}
-
-.posts.active {
-    display: block; /* 토글 시 보이도록 변경 */
-}
-
 .main {
     margin-top: 3%;
     display: flex;
