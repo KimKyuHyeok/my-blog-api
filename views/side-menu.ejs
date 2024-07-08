@@ -1,28 +1,33 @@
-<span>목록</span>
+<h4>
+    <span>목록</span>
+</h4>
+
 <% data.forEach(mainCategory => { %>
-    <div class="menu">
-        <div class="main-menu">
-            <img src="/images/right-image.png" class="main-right-image" style="height: 13px;">
-            <div class="menu-toggle" onclick="toggleMenu(this)">
+
+
+    <ul class="sidebar-list">
+        <li>
+            <div class="menu-toggle" onclick="mainToggle(this)">
                 <%= mainCategory.title %> (<%= mainCategory.subCategories.length %>)
             </div>
-        </div>
-
-        <div class="submenu">
-            <% mainCategory.subCategories.forEach(subCategory => { %>
-                <div class="sub-toggle" onclick="toggleSubMenu(this)">
-                    <img src="/images/right-image.png" class="main-right-image" style="height: 13px;">
-                    <%= subCategory.title %> (<%= subCategory.posts.length %>)
-                </div>
-                <div class="posts">
-                    <% subCategory.posts.forEach(posts => { %>
-                        <div class="post-detail">
-                            <a href="/posts/<%= posts.id %>"><%= posts.title %></a>
+            <ul class="sidebar-sub-list">
+                <li>
+                    <% mainCategory.subCategories.forEach(subCategory => { %>
+                        <div class="sub-toggle" onclick="subToggle(this)">
+                            <%= subCategory.title %> (<%= subCategory.posts.length %>)
                         </div>
+                        <ul class="sidebar-post-list">
+                            <li>
+                                <% subCategory.posts.forEach(posts => { %>
+                                    <div class="post-detail">
+                                        <a href="/posts/<%= posts.id %>"><%= posts.title %></a>
+                                    </div>
+                                <% }) %>
+                            </li>
+                        </ul>
                     <% }) %>
-                </div>
-            <% }) %>
-        </div>
-
-    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
 <% }) %>
