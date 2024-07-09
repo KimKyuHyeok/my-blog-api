@@ -29,10 +29,6 @@
     background-color: white;
 }
 
-.content code {
-    background-color: rgb(194, 181, 181);
-}
-
 .side-tap, .title, .post, .post-tap {
     padding: 20px; /* 상하좌우 20px 여백 설정 */
 }

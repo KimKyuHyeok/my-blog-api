@@ -34,20 +34,20 @@
         }
     
         document.addEventListener('DOMContentLoaded', () => {
-            const initialValue = decodeHtmlEntities(`<%= content %>`);
-    
+            const initialValue = `<%= content %>`; // HTML 엔티티 변환 없이 그대로 사용
+        
             editor = new toastui.Editor({
                 el: document.querySelector('#editorContainer'),
                 height: '500px',
                 initialEditType: 'markdown',
                 previewStyle: 'vertical',
-                initialValue: initialValue
+                initialValue: initialValue.toString
             });
         });
     
         document.getElementById('postForm').addEventListener('submit', function(event) {
             if (editor) {
-                document.getElementById('hiddenContent').value = editor.getHTML();
+                document.getElementById('hiddenContent').value = editor.getMarkdown();
             } else {
                 console.error("Editor is not initialized yet.");
                 event.preventDefault();

@@ -31,9 +31,7 @@
 
         // Add submit event listener to form
         document.getElementById('postForm').addEventListener('submit', function(event) {
-            console.log("EDIT >> ", editor);
-            document.getElementById('hiddenContent').value = editor.getHTML();
-
+            document.getElementById('hiddenContent').value = editor.getMarkdown();
         });
     </script>
 </div>
