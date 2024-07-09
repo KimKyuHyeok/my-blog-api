@@ -31,6 +31,18 @@ const postsService = {
             content: content,
             subId: subId
         });
+    },
+
+    editPost: async (title, content, postId) => {
+        const post = await Posts.findByPk(postId);
+
+        if (post) {
+            post.title = title;
+            post.content = content;
+            await post.save();
+        } else {
+            console.log("Post 가 없습니다.");
+        }
     }
 };
 

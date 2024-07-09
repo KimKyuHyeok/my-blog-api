@@ -1,0 +1,104 @@
+<%- include('../header.ejs') %>
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<div>
+    <form id="postForm" action="/admin/<%= postId %>/edit" method="POST">
+        <select name="mainId" class="form-select" id="mainSelect">
+            <option>메인 카테고리 선택</option>
+            <option selected value="<%= mainCategoryInfo.id %>"><%= mainCategoryInfo.title %></option>
+            <% mainCategoryList.forEach(mainCategory => { %>
+                <% if (mainCategory.id != mainCategoryInfo.id) { %>
+            <option value="<%= mainCategory.id %>"><%= mainCategory.title %></option>
+                <% } %>
+            <% }) %>
+        </select>
+        <select name="subId" class="form-select" id="subSelect">
+            <option>서브 카테고리 선택</option>
+            <option selected value="<%= subCategoryInfo.id %>"><%= subCategoryInfo.title %></option>
+        </select>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">제목</span>
+            <input type="text" value="<%= title %>" class="form-control" name="title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div id="editorContainer"></div>
+        <textarea name="content" id="hiddenContent" style="display:none;"></textarea>
+        <button class="btn btn-primary btn-sm" type="submit">수정</button>
+    </form>
+
+    <script>
+        let editor; // 전역 변수로 선언
+    
+        function decodeHtmlEntities(html) {
+            var txt = document.createElement("textarea");
+            txt.innerHTML = html;
+            return txt.value;
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialValue = decodeHtmlEntities(`<%= content %>`);
+    
+            editor = new toastui.Editor({
+                el: document.querySelector('#editorContainer'),
+                height: '500px',
+                initialEditType: 'markdown',
+                previewStyle: 'vertical',
+                initialValue: initialValue
+            });
+        });
+    
+        document.getElementById('postForm').addEventListener('submit', function(event) {
+            if (editor) {
+                document.getElementById('hiddenContent').value = editor.getHTML();
+            } else {
+                console.error("Editor is not initialized yet.");
+                event.preventDefault();
+            }
+        });
+    </script>
+    
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function selectSubCategories(mainId) {
+        $.ajax({
+            url: 'select/subCategory',
+            type: 'GET',
+            data: { mainId: mainId },
+            success: function(response) {
+                var subSelect = $('#subSelect');
+                subSelect.empty();
+
+                if (response && response.length > 0) {
+                    response.forEach(function(subCategory) {
+                        var newOption = $('<option></option>')
+                            .val(subCategory.id)
+                            .text(subCategory.title);
+                        subSelect.append(newOption);
+                    });
+                } else {
+                    var defaultOption = $('<option></option>')
+                        .text('해당 메인 카테고리에 서브 카테고리가 없습니다.');
+                    subSelect.append(defaultOption);
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching sub-categories:', error);
+            }
+        });
+    }
+
+    $('#mainSelect').on('change', function() {
+        var selectedMainCategoryId = $(this).val();
+        if (selectedMainCategoryId && selectedMainCategoryId !== '메인 카테고리 선택') {
+            selectSubCategories(selectedMainCategoryId);
+        } else {
+            $('#subSelect').empty();
+            var defaultOption = $('<option></option>')
+                .text('서브 카테고리 선택');
+            $('#subSelect').append(defaultOption);
+        }
+    });
+</script>
+
+</body>
+
+<%- include('../footer.ejs') %>

@@ -115,6 +115,22 @@ const categoryService = {
         await SubCategory.destroy({
             where: { id: subId }
         })
+    },
+
+    getSubCategoryIdAndTitle: async(subId) => {
+        const subCategoryInfo = await SubCategory.findOne({
+            where: { id: subId }
+        });
+
+        return subCategoryInfo;
+    },
+
+    getMainCategoryIdAndTitle: async(mainId) => {
+        const mainCategoryInfo = await MainCategory.findOne({
+            where: { id: mainId }
+        });
+
+        return mainCategoryInfo;
     }
 };
 

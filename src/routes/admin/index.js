@@ -106,8 +106,42 @@ adminRouter.post('/post/add', isAuth, async(req, res) => {
         console.log('게시물 업로드 에러 : ', err);
         res.render('admin/alert', {success: '게시물 업로드 도중 에러가 발생했습니다.'});
     }
-
-
 })
+
+
+adminRouter.get('/:id/edit', async(req, res) => {
+    const postId = req.params.id;
+    const post = await postsService.selectPost(postId);
+
+    const subCategoryId = post.subId;
+    const subCategoryInfo = await categoryService.getSubCategoryIdAndTitle(subCategoryId);
+
+    const mainCategoryInfo = await categoryService.getMainCategoryIdAndTitle(subCategoryInfo.mainId);
+    const mainCategoryList = await categoryService.mainCategoryList();
+
+    res.render('admin/edit', {
+        postId: post.id,
+        title: post.title,
+        content: post.content,
+        subCategoryInfo: subCategoryInfo,
+        mainCategoryInfo: mainCategoryInfo,
+        mainCategoryList: mainCategoryList
+    });
+})
+
+adminRouter.post('/:id/edit', async(req, res) => {
+    try {
+        const postId = req.params.id;
+        console.log("TEST > ", req.body);
+        const { title, content } = req.body;
+
+        await postsService.editPost(title, content, postId);
+
+        res.render('admin/alert', {success: '수정이 완료되었습니다.'});
+    } catch (err) {
+        console.log("게시물 수정도중 에러 발생 : ", err);
+    }
+})
+
 
 module.exports = adminRouter;
