@@ -3,6 +3,10 @@ const Posts = require('../../models/posts.model');
 const categoryService = require('../../service/category.service');
 const postsService = require('../../service/posts.service');
 const isAuth = require('../middleware/auth');
+const { upload, s3 } = require('../../config/image');
+const { Upload } = require('@aws-sdk/lib-storage');
+const { randomUUID } = require('crypto');
+const path = require('path');
 
 const adminRouter = Router();
 
@@ -97,6 +101,7 @@ adminRouter.get('/select/subCategory', isAuth, async(req, res) => {
 
 adminRouter.post('/post/add', isAuth, async(req, res) => {
     const { title, content, mainId, subId } = req.body;
+    console.log("TEST > ", req.body);
 
     try {
         await postsService.createPost(title, content, mainId, subId);
@@ -140,6 +145,44 @@ adminRouter.post('/:id/edit', async(req, res) => {
         res.render('admin/alert', {success: '수정이 완료되었습니다.'});
     } catch (err) {
         console.log("게시물 수정도중 에러 발생 : ", err);
+    }
+})
+
+
+adminRouter.post('/image-upload', upload.single('upload') ,async(req, res) => {
+    try {
+        const imageFile = req.file;
+    
+        console.log('1');
+        const orgFilename = imageFile.originalname;
+        const uuid = randomUUID().replace(/-/g, '');
+        const extension = path.extname(orgFilename);
+        const saveFilename = uuid + extension;
+    
+        const uploadParams = {
+            Bucket: process.env.BUCKET_NAME,
+            Key: saveFilename,
+            Body: imageFile.buffer,
+            ContentType: imageFile.mimetype,
+        };
+    
+        console.log('2');
+        const paralleUploadS3 = new Upload({
+            client: s3,
+            params: uploadParams
+        });
+    
+        const data = await paralleUploadS3.done();
+    
+        console.log('3');
+        res.send({
+            message: '업로드 성공',
+            filename: data.Key,
+            location: data.Location,
+        });
+    } catch (err) {
+        console.error("Image Upload Error : ", err);
+        res.status(500).send('업로드 에러')
     }
 })
 

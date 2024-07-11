@@ -1,6 +1,9 @@
+const { UUID } = require("sequelize");
 const MainCategory = require("../models/main-category.model");
 const Posts = require("../models/posts.model");
 const SubCategory = require("../models/sub-category.model");
+const { randomUUID } = require("crypto");
+const path = require("path");
 
 const postsService = {
     firstPost: async () => {
@@ -43,7 +46,7 @@ const postsService = {
         } else {
             console.log("Post 가 없습니다.");
         }
-    }
+    },
 };
 
 module.exports = postsService;
