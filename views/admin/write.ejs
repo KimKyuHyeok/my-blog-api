@@ -1,5 +1,5 @@
 <%- include('../header.ejs') %>
-<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
 <div>
     <form id="postForm" action="/admin/post/add" method="POST">
         <select name="mainId" class="form-select" id="mainSelect">
@@ -15,25 +15,48 @@
             <span class="input-group-text" id="inputGroup-sizing-default">제목</span>
             <input type="text" class="form-control" name="title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
         </div>
-        <div id="editorContainer"></div>
-        <textarea name="content" id="hiddenContent" style="display:none;"></textarea>
+		<div class="main-container">
+			<div class="presence" id="editor-presence"></div>
+			<div class="editor-container editor-container_document-editor editor-container_include-outline editor-container_include-annotations editor-container_include-pagination" id="editor-container">
+				<div class="editor-container__menu-bar" id="editor-menu-bar"></div>
+				<div class="editor-container__toolbar" id="editor-toolbar"></div>
+				<div class="editor-container__editor-wrapper">
+					<div class="editor-container__sidebar">
+						<div id="editor-outline"></div>
+					</div>
+					<div class="editor-container__editor">
+						<div id="editor"></div>
+					</div>
+					<div class="editor-container__sidebar">
+						<div id="editor-annotations"></div>
+					</div>
+				</div>
+			</div>
+			<div class="revision-history" id="editor-revision-history">
+				<div class="revision-history__wrapper">
+					<div class="revision-history__editor" id="editor-revision-history-editor"></div>
+					<div class="revision-history__sidebar" id="editor-revision-history-sidebar"></div>
+				</div>
+			</div>
+		</div>
+        <input type="hidden" id="hiddenContent" name="content"></div>
         <button class="btn btn-primary btn-sm" type="submit">작성</button>
     </form>
 
-    <script>
-        const editor = new toastui.Editor({
-            el: document.querySelector('#editorContainer'), // 에디터를 적용할 요소 (컨테이너)
-            height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
-            initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
-            initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
-            previewStyle: 'vertical'                // 마크다운 프리뷰 스타일 (tab || vertical)
-        });
-
-        // Add submit event listener to form
-        document.getElementById('postForm').addEventListener('submit', function(event) {
-            document.getElementById('hiddenContent').value = editor.getMarkdown();
-        });
+    <script src="https://cdn.ckbox.io/CKBox/2.4.0/ckbox.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.js",
+                "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.0/",
+                "ckeditor5-premium-features": "https://cdn.ckeditor.com/ckeditor5-premium-features/42.0.0/ckeditor5-premium-features.js",
+                "ckeditor5-premium-features/": "https://cdn.ckeditor.com/ckeditor5-premium-features/42.0.0/"
+            }
+        }
     </script>
+    <script type="module" src="./main.js"></script>
+
+
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
