@@ -47,6 +47,37 @@ const postsService = {
             console.log("Post 가 없습니다.");
         }
     },
+
+    getPosts: async () => {
+
+        try {
+            const list = await MainCategory.findAll({
+                include: [
+                    {
+                        model: SubCategory,
+                        include: {
+                            model: Posts
+                        }
+                    }
+                ],
+                order: [['id', 'DESC']],
+            });
+
+            return list;
+        } catch (err) {
+            console.error("Get Post List Error : ", err);
+        }
+    },
+
+    deletePost: async (id) => {
+        try {
+            await Posts.destroy({
+                where: { id: id }
+            });
+        } catch (err) {
+            console.error("Post delete Error : ", err);
+        }
+    }
 };
 
 module.exports = postsService;

@@ -114,7 +114,7 @@ adminRouter.post('/post/add', isAuth, async(req, res) => {
 })
 
 
-adminRouter.get('/:id/edit', async(req, res) => {
+adminRouter.get('/:id/edit', isAuth, async(req, res) => {
     const postId = req.params.id;
     const post = await postsService.selectPost(postId);
 
@@ -134,7 +134,7 @@ adminRouter.get('/:id/edit', async(req, res) => {
     });
 })
 
-adminRouter.post('/:id/edit', async(req, res) => {
+adminRouter.post('/:id/edit', isAuth, async(req, res) => {
     try {
         const postId = req.params.id;
         console.log("TEST > ", req.body);
@@ -183,6 +183,26 @@ adminRouter.post('/image-upload', upload.single('upload') ,async(req, res) => {
     } catch (err) {
         console.error("Image Upload Error : ", err);
         res.status(500).send('업로드 에러')
+    }
+})
+
+adminRouter.get('/posts', isAuth, async(req, res) => {
+    const list = await postsService.getPosts();
+
+    res.render('admin/posts', {
+        list: list
+    });
+})
+
+adminRouter.get('/:id/post/delete', isAuth, async(req, res) => {
+    const id = req.params.id;
+
+    try {
+        await postsService.deletePost(id);
+
+        res.render('admin/alert', {success: '게시물이 삭제되었습니다.'});
+    } catch (err) {
+        console.log(err);
     }
 })
 

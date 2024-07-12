@@ -241,3 +241,8 @@
 img {
     overflow: auto;
 }
+
+.btn-list {
+    display: flex;
+    justify-content: flex-end;
+}

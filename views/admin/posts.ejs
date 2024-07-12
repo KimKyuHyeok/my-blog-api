@@ -1,0 +1,37 @@
+<%- include('../header.ejs') %>
+
+<div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">메인 카테고리</th>
+                <th scope="col">서브 카테고리</th>
+                <th scope="col">게시글 제목</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% list.forEach(mainCategory => { %>
+                <% mainCategory.subCategories.forEach(subCategory => { %>
+                    <% subCategory.posts.forEach(post => { %>
+                        <tr>
+                            <td><%= mainCategory.title %></td>
+                            <td><%= subCategory.title %></td>
+                            <td>
+                                <%= post.title %>
+                                <div class="btn-list">
+                                    <button onclick="location.href='/admin/<%= post.id %>/edit'" class="btn btn-warning btn-sm">수정</button>
+                                    <button onclick="location.href='/admin/<%= post.id %>/post/delete'" class="btn btn-danger btn-sm">삭제</button>
+                                </div>
+                            </td>
+
+                        </tr>
+                    <% }) %>
+                <% }) %>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+
+<%- include('../footer.ejs') %>

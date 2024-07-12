@@ -1,6 +1,7 @@
 <%- include('../header.ejs') %>
     <div>
         <button onclick="location.href='/admin/write'" class="btn btn-outline-success write-btn">포스터 작성하기</button>
+        <button onclick="location.href='/admin/posts'" class="btn btn-outline-success write-btn">포스터 관리</button>
         <div class="main-category-add">
             <h5>메인 카테고리 추가</h5>
             <form action="/admin/mainCategory/add" method="POST">
