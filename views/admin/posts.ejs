@@ -17,8 +17,8 @@
                         <tr>
                             <td><%= mainCategory.title %></td>
                             <td><%= subCategory.title %></td>
-                            <td>
-                                <%= post.title %>
+                            <td class="main-td">
+                                <span><%= post.title %></span>
                                 <div class="btn-list">
                                     <button onclick="location.href='/admin/<%= post.id %>/edit'" class="btn btn-warning btn-sm">수정</button>
                                     <button onclick="location.href='/admin/<%= post.id %>/post/delete'" class="btn btn-danger btn-sm">삭제</button>

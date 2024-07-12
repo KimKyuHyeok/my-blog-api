@@ -243,6 +243,9 @@ img {
 }
 
 .btn-list {
-    display: flex;
     justify-content: flex-end;
+}
+
+.main-td {
+    display: flex;
 }
