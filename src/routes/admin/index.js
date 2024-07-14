@@ -189,7 +189,7 @@ adminRouter.post('/image-upload', upload.single('upload') ,async(req, res) => {
 adminRouter.get('/posts', isAuth, async(req, res) => {
     const list = await postsService.getPosts();
 
-    res.render('admin/posts', {
+    res.render('admin/posts-admin', {
         list: list
     });
 })
