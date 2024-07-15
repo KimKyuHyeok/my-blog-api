@@ -2,15 +2,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div>
     <form id="postForm" action="/admin/<%= postId %>/edit" method="POST">
-        <select name="mainId" class="form-select" id="mainSelect">
-            <option>메인 카테고리 선택</option>
-            <option selected value="<%= mainCategoryInfo.id %>"><%= mainCategoryInfo.title %></option>
-            <% mainCategoryList.forEach(mainCategory => { %>
-                <% if (mainCategory.id != mainCategoryInfo.id) { %>
-            <option value="<%= mainCategory.id %>"><%= mainCategory.title %></option>
-                <% } %>
-            <% }) %>
-        </select>
         <select name="subId" class="form-select" id="subSelect">
             <option>서브 카테고리 선택</option>
             <option selected value="<%= subCategoryInfo.id %>"><%= subCategoryInfo.title %></option>

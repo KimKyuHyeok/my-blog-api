@@ -1,14 +1,14 @@
 <%- include('./header.ejs') %>
-    <div class="main">
-        <div class="post-tap">
-            <%- include('./post-tap.ejs', { firstPost: post }) %>
-        </div>
 
-        <div class="side-tap">
-            <%- include('./side-menu.ejs', { data: categories }) %>
-        </div>
-    </div>
-
-</body>
-
+		
+            <div id="main">
+                <section id="one">
+                    <header class="major">
+                        <h2><%= post.title %></h2>
+                    </header>
+                    <div id="content">
+                        <p><%= post.content %></p>
+                    </div>
+                </section>
+            </div>
 <%- include('./footer.ejs') %>

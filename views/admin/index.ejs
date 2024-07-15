@@ -1,52 +1,23 @@
 <%- include('../header.ejs') %>
-    <div>
+    <div id="main">
         <button onclick="location.href='/admin/write'" class="btn btn-outline-success write-btn">포스터 작성하기</button>
         <button onclick="location.href='/admin/posts'" class="btn btn-outline-success write-btn">포스터 관리</button>
-        <div class="main-category-add">
-            <h5>메인 카테고리 추가</h5>
-            <form action="/admin/mainCategory/add" method="POST">
-                <input type="text" name="title">
-                <button class="btn btn-primary btn-sm" type="submit">추가</button>
-            </form>
-        </div>
-        <div class="main-category-update">
-            <h5>메인 카테고리 수정</h5>
-            <form id="mainForm" method="POST">
-                <select name="mainId" class="form-select" aria-label="Default select example">
-                    <option selected>메인 카테고리 선택</option>
-                    <% mainCategoryList.forEach(mainCategory => { %>
-                    <option value="<%= mainCategory.id %>"><%= mainCategory.title %></option>
-                    <% }) %>
-                </select>
-                <input type="text" name="title" id="title">
-                <button class="btn btn-warning btn-sm" onclick="submitForm('/admin/mainCategory/update')">수정</button>
-                <button class="btn btn-danger btn-sm" onclick="submitForm('/admin/mainCategory/delete')">삭제</button>
-            </form>
-        </div>
         
         <div class="sub-category-add">
-            <h5>서브 카테고리 추가</h5>
+            <h5>카테고리 추가</h5>
             <form action="/admin/subCategory/add" method="POST">
-                <select name="mainId" class="form-select" aria-label="Default select example">
-                    <option selected>메인 카테고리 선택</option>
-                    <% subCategoryList.forEach(mainCategory => { %>
-                    <option value="<%= mainCategory.id %>"><%= mainCategory.title %></option>
-                    <% }) %>
-                </select>
                 <input type="text" name="title" id="title">
                 <button class="btn btn-primary btn-sm" type="submit">생성</button>
             </form>
         </div>
 
         <div class="sub-category-update">
-            <h5>서브 카테고리 수정</h5>
+            <h5>카테고리 수정</h5>
             <form method="POST" id="subForm">
                 <select name="subId" class="form-select" aria-label="Default select example">
-                    <option selected>서브 카테고리 선택</option>
-                    <% subCategoryList.forEach(mainCategory => { %>
-                        <% mainCategory.subCategories.forEach(subCategory => { %>
+                    <option selected>카테고리 선택</option>
+                    <% subCategoryList.forEach(subCategory => { %>
                     <option value="<%= subCategory.id %>"><%= subCategory.title %></option>
-                        <% }) %>
                     <% }) %>
                 </select>
                 <input type="text" name="title" id="title">

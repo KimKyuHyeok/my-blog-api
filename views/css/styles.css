@@ -178,21 +178,13 @@
     background-color: #f5f5f5;
 }
 
-.side-tap {
-    float: right;
-    width: 20%;
-    height: 850px;
-    border-left: 1px solid gray;
-}
-
-.menu-toggle:hover, .sub-toggle:hover, .post-detail:hover {
+.category-name:hover, .post-detail:hover {
     font-weight: bolder;
 }
 
 
-.sub-toggle, .post-detail {
+.post-detail {
     list-style-type: none;
-    margin-left: 15px;
 }
 
 .sub-toggle, .main-menu {
@@ -200,13 +192,12 @@
     align-items: center;
 }
 
-.post-detail>a {
-    color: black;
-    text-decoration: none;
-}
-
 .main-menu, .sub-table {
     display: flex;
+}
+
+a {
+    text-decoration: none;
 }
 
 .menu>img {
@@ -248,4 +239,13 @@ img {
 
 .main-td {
     display: flex;
+}
+
+.major {
+    margin: 3em 0;
+}
+
+.content p {
+    position: relative;
+    margin: 0 0 1.5em 0;
 }

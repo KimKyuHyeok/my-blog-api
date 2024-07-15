@@ -1,24 +1,24 @@
 <%- include('../header.ejs') %>
 
-<div>
+<div id="main">
 
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">메인 카테고리</th>
-                <th scope="col">서브 카테고리</th>
+                <th scope="col">카테고리</th>
                 <th scope="col">게시글 제목</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <% list.forEach(mainCategory => { %>
-                <% mainCategory.subCategories.forEach(subCategory => { %>
+            <% subCategoryList.forEach(subCategory => { %>
                     <% subCategory.posts.forEach(post => { %>
                         <tr>
-                            <td><%= mainCategory.title %></td>
                             <td><%= subCategory.title %></td>
                             <td class="main-td">
                                 <span><%= post.title %></span>
+                            </td>
+                            <td>
                                 <div class="btn-list">
                                     <button onclick="location.href='/admin/<%= post.id %>/edit'" class="btn btn-warning btn-sm">수정</button>
                                     <button onclick="location.href='/admin/<%= post.id %>/post/delete'" class="btn btn-danger btn-sm">삭제</button>
@@ -27,7 +27,6 @@
 
                         </tr>
                     <% }) %>
-                <% }) %>
             <% }) %>
         </tbody>
     </table>
