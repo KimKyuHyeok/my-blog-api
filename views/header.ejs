@@ -40,8 +40,13 @@
       </div>
       <div class="inner">
           <% categories.forEach(subCategory => { %>
+            <% let cnt = 0 
+               if (subCategory.posts.length) {
+                cnt = subCategory.posts.length;
+               }
+            %>
               <div class="sub-toggle category-name" onclick="subToggle(this)">
-                  <a><%= subCategory.title %> (<%= subCategory.posts.length %>)</a>
+                  <a><%= subCategory.title %> (<%= cnt %>)</a>
               </div>
               <ul class="sidebar-post-list">
                   <li>
