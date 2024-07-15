@@ -1,5 +1,4 @@
 const { UUID } = require("sequelize");
-const MainCategory = require("../models/main-category.model");
 const Posts = require("../models/posts.model");
 const SubCategory = require("../models/sub-category.model");
 const { randomUUID } = require("crypto");

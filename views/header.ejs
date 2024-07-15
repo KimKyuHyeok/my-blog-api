@@ -36,23 +36,33 @@
           </nav>
       </div>
       <div class="inner">
-          <% categories.forEach(subCategory => { %>
+        <% categories.forEach(subCategory => { %>
             <% let cnt = 0; %>
-            <% if (subCategory.posts && subCategory.posts.length) { %>
-            <% cnt = subCategory.posts.length; %>
-            <% } %>
-              <div class="sub-toggle category-name" onclick="subToggle(this)">
-                  <a><%= subCategory.title %> (<%= cnt %>)</a>
-              </div>
-              <ul class="sidebar-post-list">
-                  <li>
-                      <% subCategory.posts.forEach(posts => { %>
-                          <div class="post-detail">
-                              <a href="/posts/<%= posts.id %>"><%= posts.title %></a>
-                          </div>
-                      <% }) %>
-                  </li>
-              </ul>
-          <% }) %>
-      </div>
+            <div class="sub-toggle category-name" onclick="subToggle(this)">
+                <a><%= subCategory.title %> (
+                    <% if (subCategory.posts && subCategory.posts.length) { %>
+                        <% cnt = subCategory.posts.length; %>
+                        <%= cnt %>
+                    <% } else { %>
+                        0
+                    <% } %>
+                    )
+                </a>
+            </div>
+            <ul class="sidebar-post-list">
+                <% if (subCategory.posts && subCategory.posts.length) { %>
+                    <% subCategory.posts.forEach(post => { %>
+                        <li>
+                            <div class="post-detail">
+                                <a href="/posts/<%= post.id %>"><%= post.title %></a>
+                            </div>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                    <li>No posts found.</li>
+                <% } %>
+            </ul>
+        <% }) %>
+    </div>
+    
     </div>

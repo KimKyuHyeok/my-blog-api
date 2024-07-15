@@ -1,4 +1,3 @@
-const MainCategory = require("../models/main-category.model");
 const Posts = require("../models/posts.model");
 const SubCategory = require("../models/sub-category.model");
 
@@ -19,14 +18,6 @@ const categoryService = {
         }
     },
 
-    selectMainCategory: async(mainId) => {
-        const subCategories = await SubCategory.findAll({
-            where: { mainId: mainId }
-        });
-
-        return subCategories.length;
-    },
-
     selectSubCategoryList: async(mainId) => {
         const subCategoryList = await SubCategory.findAll({
             where: { mainId: mainId }
@@ -37,13 +28,7 @@ const categoryService = {
 
     subCategoryList: async() => {
         try {
-            const result = await MainCategory.findAll({
-                include: [
-                    {
-                        model: SubCategory
-                    }
-                ]
-            });
+            const result = await SubCategory.findAll();
             return result;
         } catch (err) {
             console.log('[CategoryService] subCategoryList Error : ', err)
