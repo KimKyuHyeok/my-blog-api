@@ -24,10 +24,10 @@ adminRouter.post('/password', async(req, res, next) => {
 });
 
 adminRouter.get('/', isAuth, async(req, res) => {
-    const subCategoryList = await categoryService.subCategoryList();
+    const categories = await categoryService.sideMenuList();
 
     res.render('admin/index', {
-        subCategoryList: subCategoryList
+        categories: categories
     })
 })
 
@@ -152,8 +152,10 @@ adminRouter.post('/image-upload', upload.single('upload') ,async(req, res) => {
 
 adminRouter.get('/posts', isAuth, async(req, res) => {
     const list = await postsService.getPosts();
+    const categories = await categoryService.sideMenuList();
 
     res.render('admin/posts-admin', {
+        categories: categories,
         subCategoryList: list
     });
 })

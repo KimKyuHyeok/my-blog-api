@@ -16,7 +16,7 @@
             <form method="POST" id="subForm">
                 <select name="subId" class="form-select" aria-label="Default select example">
                     <option selected>카테고리 선택</option>
-                    <% subCategoryList.forEach(subCategory => { %>
+                    <% categories.forEach(subCategory => { %>
                     <option value="<%= subCategory.id %>"><%= subCategory.title %></option>
                     <% }) %>
                 </select>
