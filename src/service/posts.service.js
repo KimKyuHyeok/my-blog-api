@@ -51,16 +51,11 @@ const postsService = {
     getPosts: async () => {
 
         try {
-            const list = await MainCategory.findAll({
-                include: [
-                    {
-                        model: SubCategory,
-                        include: {
-                            model: Posts
-                        }
-                    }
-                ],
-                order: [['id', 'DESC']],
+            const list = await SubCategory.findAll({
+                include: [{
+                    model: Posts
+                }],
+                order: [['id', 'DESC']]
             });
 
             return list;

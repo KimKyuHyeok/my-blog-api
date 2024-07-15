@@ -14,6 +14,15 @@ postsRouter.get('/', async(req, res) => {
     });
 })
 
+postsRouter.get('/test', async(req, res) => {
+    const categories = await categoryService.sideMenuList();
+    const firstPost = await postsService.firstPost();
+    res.render('test', {
+        categories: categories,
+        firstPost: firstPost
+    });
+})
+
 postsRouter.get('/:id', async(req, res) => {
     const id = req.params.id;
     const categories = await categoryService.sideMenuList();

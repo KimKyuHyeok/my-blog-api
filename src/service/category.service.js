@@ -5,31 +5,16 @@ const SubCategory = require("../models/sub-category.model");
 const categoryService = {
     sideMenuList: async () => {
         try {
-            const result = await MainCategory.findAll({
-                include: [
-                    {
-                        model: SubCategory,
-                        include: {
-                            model: Posts
-                        }
-                    }
-                ],
-                order: [['title', 'DESC']],
+            const result = await SubCategory.findAll({
+                include: [{
+                    model: Posts
+                }],
+                order: [['id', 'DESC']],
             });
+
             return result;
         } catch (err) {
             console.log('[CategoryService] sideMenuList Error : ', err)
-            throw err;
-        }
-    },
-
-    mainCategoryList: async() => {
-        try {
-            const mainCategoryList = await MainCategory.findAll();
-
-            return mainCategoryList;
-        } catch (err) {
-            console.log('[CategoryService] mainCategoryList Error : ', err)
             throw err;
         }
     },
@@ -66,30 +51,11 @@ const categoryService = {
         }
     },
 
-    addMainCategory: async(title) => {
-        await MainCategory.create({
-            title: title
-        });
-    },
-
     addSubCategory: async(title, mainId) => {
         await SubCategory.create({
             title: title,
             mainId: mainId
         });
-    },
-
-    updateMainCategory: async(title, mainId) => {
-        await MainCategory.update(
-            {
-            title: title
-            },
-            {
-                where: {
-                    id: mainId
-                }
-            }
-        )
     },
 
     updateSubCategory: async(title, subId) => {
@@ -105,12 +71,6 @@ const categoryService = {
         )
     },
 
-    deleteMainCategory: async(mainId) => {
-        await MainCategory.destroy({
-            where: { id: mainId }
-        })
-    },
-
     deleteSubCategory: async(subId) => {
         await SubCategory.destroy({
             where: { id: subId }
@@ -124,14 +84,6 @@ const categoryService = {
 
         return subCategoryInfo;
     },
-
-    getMainCategoryIdAndTitle: async(mainId) => {
-        const mainCategoryInfo = await MainCategory.findOne({
-            where: { id: mainId }
-        });
-
-        return mainCategoryInfo;
-    }
 };
 
 module.exports = categoryService;

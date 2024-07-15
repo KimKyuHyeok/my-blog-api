@@ -24,42 +24,11 @@ adminRouter.post('/password', async(req, res, next) => {
 });
 
 adminRouter.get('/', isAuth, async(req, res) => {
-    const mainCategoryList = await categoryService.mainCategoryList();
     const subCategoryList = await categoryService.subCategoryList();
 
     res.render('admin/index', {
-        mainCategoryList: mainCategoryList,
         subCategoryList: subCategoryList
     })
-})
-
-adminRouter.post('/mainCategory/add', isAuth, async(req, res) => {
-    const addTitle = req.body.title;
-    categoryService.addMainCategory(addTitle);
-
-    res.render('admin/alert', {success: '업로드가 완료되었습니다.'});
-})
-
-adminRouter.post('/mainCategory/update', isAuth, async(req, res) => {
-    const updateTitle = req.body.title;
-    const mainId = req.body.mainId;
-    categoryService.updateMainCategory(updateTitle, mainId);
-
-    res.render('admin/alert', {success: '수정이 완료되었습니다.'});
-})
-
-adminRouter.post('/mainCategory/delete', isAuth, async(req, res) => {
-    const mainId = req.body.mainId;
-
-    const select = await categoryService.selectMainCategory(mainId);
-
-    if (select !== 0) {
-        res.render('admin/alert', {success: 'SubCategory 먼저 삭제 후 진행해주세요.'});
-    } else {
-        categoryService.deleteMainCategory(mainId);
-    }
-
-    res.render('admin/alert', {success: '삭제가 완료되었습니다.'});
 })
 
 adminRouter.post('/subCategory/add', isAuth, async(req, res) => {
@@ -86,10 +55,10 @@ adminRouter.post('/subCategory/delete', isAuth, async(req, res) => {
 })
 
 adminRouter.get('/write', isAuth, async (req, res) => {
-    const mainCategoryList = await categoryService.mainCategoryList();
+    const subCategoryList = await categoryService.subCategoryList();
 
     res.render('admin/write', {
-        mainCategoryList: mainCategoryList
+        subCategoryList: subCategoryList
     });
 })
 
@@ -121,16 +90,11 @@ adminRouter.get('/:id/edit', isAuth, async(req, res) => {
     const subCategoryId = post.subId;
     const subCategoryInfo = await categoryService.getSubCategoryIdAndTitle(subCategoryId);
 
-    const mainCategoryInfo = await categoryService.getMainCategoryIdAndTitle(subCategoryInfo.mainId);
-    const mainCategoryList = await categoryService.mainCategoryList();
-
     res.render('admin/edit', {
         postId: post.id,
         title: post.title,
         content: post.content,
         subCategoryInfo: subCategoryInfo,
-        mainCategoryInfo: mainCategoryInfo,
-        mainCategoryList: mainCategoryList
     });
 })
 
@@ -190,7 +154,7 @@ adminRouter.get('/posts', isAuth, async(req, res) => {
     const list = await postsService.getPosts();
 
     res.render('admin/posts-admin', {
-        list: list
+        subCategoryList: list
     });
 })
 
