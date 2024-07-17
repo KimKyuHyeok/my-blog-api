@@ -133,6 +133,10 @@
     break-after: auto;
 }
 
+.menu ul {
+    display: flex;
+    justify-content: space-around;
+}
 
 
 
