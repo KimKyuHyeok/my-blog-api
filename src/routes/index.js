@@ -11,6 +11,10 @@ const api = Router()
 api.use('/posts', postsRouter);
 api.use('/admin', adminRouter);
 
+api.get('/', (req, res) => {
+    res.redirect('/posts');
+})
+
 api.get('/image/:filename', async (req, res) => {
     const image = await getImage(req.params.filename);
 
