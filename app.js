@@ -4,19 +4,21 @@ const sequelize = require('./src/config/db.js');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cors = require('cors');
 const app = express();
 
 const port = 80;
 
 /* Options */
 app.use(express.json());
+app.use(cors());
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express.static(path.join(__dirname, './views')));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({
-    secret: 'your_secret_key',
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
 }));
