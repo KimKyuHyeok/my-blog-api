@@ -1,9 +1,17 @@
-function isAuth(req, res, next) {
-    if (req.session.authenticated) {
-        next();
+function authenticateJwt(req, res, next) {
+    const token = req.headers['authorization'] && req.headers['authorization'].split(' ')[1];
+
+    if (token) {
+        jwt.verify(token, secretKey, (err, user) => {
+            if (err) {
+                return res.sendStatus(403);
+            }
+            req.user = user;
+            next();
+        })
     } else {
-        res.render('admin/password');
+        res.sendStatus(401);
     }
 }
 
-module.exports = isAuth;
+module.exports = authenticateJwt;

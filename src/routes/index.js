@@ -2,20 +2,18 @@ const {Router} = require('express');
 const postsRouter = require('./posts');
 const Posts = require('../models/posts.model');
 const SubCategory = require('../models/sub-category.model');
-const adminRouter = require('./admin');
+const adminRouter = require('./admin/index');
 const { getImage } = require('../config/image');
 const jwt = require('jsonwebtoken');
+const authenticateJwt = require('./middleware/auth');
 require('dotenv').config()
 
 const secretKey = process.env.SECRET_KEY;
 const api = Router()
 
-api.use('/posts', postsRouter);
-api.use('/admin', adminRouter);
+api.use('/api/post', postsRouter);
+api.use('/api/admin', adminRouter);
 
-api.get('/', (req, res) => {
-    res.redirect('/posts');
-})
 
 api.get('/image/:filename', async (req, res) => {
     const image = await getImage(req.params.filename);
@@ -27,7 +25,7 @@ api.get('/image/:filename', async (req, res) => {
 api.post('/api/password/confirm', (req, res) => {
     const { password } = req.body;
 
-    if (password === '1234') {
+    if (password === process.env.ADMIN_PASSWORD) {
         const token = jwt.sign({ user: 'Admin' }, secretKey, { expiresIn: '1h' });
         res.json({ token });
     } else {
@@ -39,21 +37,7 @@ api.get('/api/admin',authenticateJwt, (req, res) => {
     res.json({ message: 'Admin' })
 })
 
-function authenticateJwt(req, res, next) {
-    const token = req.headers['authorization'] && req.headers['authorization'].split(' ')[1];
 
-    if (token) {
-        jwt.verify(token, secretKey, (err, user) => {
-            if (err) {
-                return res.sendStatus(403);
-            }
-            req.user = user;
-            next();
-        })
-    } else {
-        res.sendStatus(401);
-    }
-}
 
 
 module.exports = api;
