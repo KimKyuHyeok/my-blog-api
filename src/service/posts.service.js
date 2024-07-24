@@ -16,7 +16,7 @@ const postsService = {
         }
     },
 
-    selectPost: async(postId) => {
+    findOnePost: async(postId) => {
         try {
             const result = await Posts.findOne({
                 where: {id: postId}
@@ -27,14 +27,16 @@ const postsService = {
         }
     },
 
-    createPost: async (title, content, mainId, subId) => {
+    //ref
+    createPost: async (title, content, categoryId) => {
         await Posts.create({
             title: title,
             content: content,
-            subId: subId
+            subId: categoryId
         });
     },
 
+    //ref
     editPost: async (title, content, postId) => {
         const post = await Posts.findByPk(postId);
 
@@ -63,6 +65,7 @@ const postsService = {
         }
     },
 
+    // ref
     deletePost: async (id) => {
         try {
             await Posts.destroy({

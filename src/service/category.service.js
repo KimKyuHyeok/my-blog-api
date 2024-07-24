@@ -2,31 +2,9 @@ const Posts = require("../models/posts.model");
 const SubCategory = require("../models/sub-category.model");
 
 const categoryService = {
-    sideMenuList: async () => {
-        try {
-            const result = await SubCategory.findAll({
-                include: [{
-                    model: Posts
-                }],
-                order: [['id', 'DESC']],
-            });
 
-            return result;
-        } catch (err) {
-            console.log('[CategoryService] sideMenuList Error : ', err)
-            throw err;
-        }
-    },
-
-    selectSubCategoryList: async(mainId) => {
-        const subCategoryList = await SubCategory.findAll({
-            where: { mainId: mainId }
-        });
-
-        return subCategoryList;
-    },
-
-    subCategoryList: async() => {
+    //ref
+    getCategoryList: async() => {
         try {
             const result = await SubCategory.findAll();
             return result;
@@ -36,39 +14,35 @@ const categoryService = {
         }
     },
 
-    addSubCategory: async(title, mainId) => {
+    //ref
+    addCategory: async(title) => {
         await SubCategory.create({
             title: title,
-            mainId: mainId
         });
     },
 
-    updateSubCategory: async(title, subId) => {
+
+    //ref
+    updateCategory: async(title, id) => {
         await SubCategory.update(
             {
                 title: title
             },
             {
                 where: {
-                    id: subId
+                    id: id
                 }
             }
         )
     },
 
-    deleteSubCategory: async(subId) => {
+    // ref
+    deleteCategory: async(id) => {
         await SubCategory.destroy({
-            where: { id: subId }
+            where: { id: id }
         })
     },
 
-    getSubCategoryIdAndTitle: async(subId) => {
-        const subCategoryInfo = await SubCategory.findOne({
-            where: { id: subId }
-        });
-
-        return subCategoryInfo;
-    },
 };
 
 module.exports = categoryService;
