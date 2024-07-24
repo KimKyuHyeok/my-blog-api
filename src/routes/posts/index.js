@@ -1,16 +1,12 @@
 const { Router } = require('express');
-const Posts = require('../../models/posts.model');
 const categoryService = require('../../service/category.service');
 const postsService = require('../../service/posts.service');
-const SubCategory = require('../../models/sub-category.model');
 
 const postsRouter = Router();
 
 postsRouter.get('/categories', async(req, res) => {
-    console.log("TEST");
     try {
-        console.log("Ts")
-        const response = await categoryService.sideMenuList();
+        const response = await categoryService.getCategoryList();
         res.json(response).status(200);
     } catch (err) {
         console.log('[API] /api/post/menuList Error : ', err);
