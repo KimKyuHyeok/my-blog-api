@@ -22,7 +22,7 @@ export default {
         })
 
         onMounted(() => {
-            let url = `http://localhost/posts/api/posts/${postId}`;
+            let url = `/api/post/${postId}`;
             axios.get(url)
                 .then(response => {
                     PostInfo.title = response.data.title;
