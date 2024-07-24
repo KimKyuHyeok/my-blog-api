@@ -26,16 +26,13 @@ export default {
     name: 'menuList',
     setup() {
         const menuList = ref([]);
-        // 각 카테고리의 활성화 상태를 저장하는 배열
         const activeCategories = ref([]);
 
         onMounted(() => {
-            const url = 'http://localhost/posts/api/menuList';
+            let url = '/api/post/categories';
             axios.get(url)
                 .then(response => {
                     menuList.value = response.data;
-                    // 카테고리의 개수만큼 기본적으로 비활성화 상태로 초기화
-                    activeCategories.value = new Array(response.data.length).fill(false);
                 })
                 .catch(err => {
                     console.log(err);
