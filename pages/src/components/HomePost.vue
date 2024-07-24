@@ -50,4 +50,12 @@ export default {
 .image {
     text-align: center;
 }
+
+p {
+    margin-bottom: 30px;
+}
+
+pre {
+    margin: 30px 0;
+}
 </style>
