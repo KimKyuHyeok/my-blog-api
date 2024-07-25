@@ -63,6 +63,16 @@ adminRouter.post('/delete/category', authenticateJwt, async(req, res) => {
 
 // [API] Post
 
+adminRouter.get('/list/post', authenticateJwt, async (req, res) => {
+    try {
+        const response = await postsService.getPosts();
+
+        res.json(response).status(200).send();
+    } catch (err) {
+        console.log('[API] /api/admin/list/post Error : ', err);
+    }
+})
+
 adminRouter.post('/add/post', authenticateJwt, async (req, res) => {
     const { categoryId, title, content } = req.body;
 
