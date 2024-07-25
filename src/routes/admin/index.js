@@ -50,7 +50,7 @@ adminRouter.post('/update/category', authenticateJwt, async(req, res) => {
 })
 
 adminRouter.post('/delete/category', authenticateJwt, async(req, res) => {
-    const id = req.body;
+    const id = req.body.id;
 
     try {
         await categoryService.deleteCategory(id);
