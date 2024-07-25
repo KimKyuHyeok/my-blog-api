@@ -18,10 +18,10 @@ adminRouter.get('/list/category', authenticateJwt, async(req, res) => {
     try {
         const response = categoryService.getCategoryList();
 
-        res.json(response).status(200);
+        res.json(response).status(200).send();
     } catch (err) {
         console.log('[API] /api/admin/list/category Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다. : ', err);
     }
 })
 
@@ -30,10 +30,10 @@ adminRouter.post('/add/category', authenticateJwt, async(req, res) => {
     
     try {
         await categoryService.addCategory(title);
-        res.status(200);
+        res.status(200).send('카테고리 등록 완료');
     } catch (err) {
         console.log('[API] /api/admin/add/category Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다. : ', err);
     }
 })
 
@@ -42,10 +42,10 @@ adminRouter.post('/update/category', authenticateJwt, async(req, res) => {
 
     try {
         await categoryService.updateCategory(title, id);
-        res.status(200);
+        res.status(200).send('카테고리 수정 완료');
     } catch (err) {
         console.log('[API] /api/admin/update/category Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다. : ', err);
     }
 })
 
@@ -54,10 +54,10 @@ adminRouter.post('/delete/category', authenticateJwt, async(req, res) => {
 
     try {
         await categoryService.deleteCategory(id);
-        res.status(200);
+        res.status(200).send('카테고리 삭제 완료');
     } catch (err) {
         console.log('[API] /api/admin/delete/category Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다. : ', err);
     }
 })
 
@@ -69,10 +69,10 @@ adminRouter.post('/add/post', authenticateJwt, async (req, res) => {
     try {
         await postsService.createPost(title, content, categoryId);
 
-        res.status(200);
+        res.status(200).send('게시글 작성 완료');
     } catch (err) {
         console.log('[API] /api/admin/add/post Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다. : ', err);
     }
 })
 
@@ -82,10 +82,10 @@ adminRouter.post('/update/post', authenticateJwt, async (req, res) => {
     try {
         await postsService.editPost(title, content, id);
 
-        res.status(200);
+        res.status(200).send('게시글 수정 완료');
     } catch (err) {
         console.log('[API] /api/admin/update/post Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다. : ', err);
     }
 })
 
@@ -95,10 +95,10 @@ adminRouter.post('/delete/post', authenticateJwt, async (req, res) => {
     try {
         await postsService.deletePost(id);
 
-        res.status(200);
+        res.status(200).send('게시글 삭제 완료');
     } catch (err) {
         console.log('[API] /api/admin/delete/post Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다. : ', err);
     }
 })
 
@@ -108,10 +108,10 @@ adminRouter.get('/:id', authenticateJwt, async (req, res) => {
     try {
         const response = await postsService.findOnePost(id);
 
-        res.json(response).status(200);
+        res.json(response).status(200).send();
     } catch (err) {
         console.log('[API] /api/admin/:id Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다. : ', err);
     }
 })
 
@@ -142,7 +142,6 @@ adminRouter.post('/image-upload', upload.single('upload') ,async(req, res) => {
     
         const data = await paralleUploadS3.done();
     
-        console.log('3');
         res.send({
             message: '업로드 성공',
             filename: data.Key,

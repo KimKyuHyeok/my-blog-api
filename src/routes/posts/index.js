@@ -6,11 +6,11 @@ const postsRouter = Router();
 
 postsRouter.get('/categories', async(req, res) => {
     try {
-        const response = await categoryService.getCategoryList();
+        const response = await categoryService.getCategoryAndPostList();
         res.json(response).status(200);
     } catch (err) {
         console.log('[API] /api/post/menuList Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다 : ', err);
     }
 })
 
@@ -23,7 +23,7 @@ postsRouter.get('/:postId', async(req, res) => {
         res.json(response).status(200);
     } catch (err) {
         console.log('[API] /api/post/:postId Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다 : ', err);
     }
 })
 
@@ -33,7 +33,7 @@ postsRouter.get('/', async(req, res) => {
         res.json(firstPost).status(200);
     } catch (err) {
         console.log('[API] /api/post Error : ', err);
-        res.status(400);
+        res.status(400).send('에러가 발생했습니다 : ', err);
     }
 })
 
