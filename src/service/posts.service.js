@@ -74,6 +74,16 @@ const postsService = {
         } catch (err) {
             console.error("Post delete Error : ", err);
         }
+    },
+
+    getPostList: async () => {
+        try {
+            const result = await Posts.findAll()
+
+            return result;
+        } catch (err) {
+            console.error(err);
+        }
     }
 };
 

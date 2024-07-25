@@ -65,7 +65,7 @@ adminRouter.post('/delete/category', authenticateJwt, async(req, res) => {
 
 adminRouter.get('/list/post', authenticateJwt, async (req, res) => {
     try {
-        const response = await postsService.getPosts();
+        const response = await postsService.getPostList();
 
         res.json(response).status(200).send();
     } catch (err) {
