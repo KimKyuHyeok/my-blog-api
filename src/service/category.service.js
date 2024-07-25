@@ -4,7 +4,7 @@ const SubCategory = require("../models/sub-category.model");
 const categoryService = {
 
     //ref
-    getCategoryList: async() => {
+    getCategoryAndPostList: async() => {
         try {
             const result = await SubCategory.findAll({
                 include: {
@@ -13,10 +13,22 @@ const categoryService = {
             });
             return result;
         } catch (err) {
-            console.log('[CategoryService] subCategoryList Error : ', err)
+            console.log('[CategoryService] subCategoryAndPostList Error : ', err)
             throw err;
         }
     },
+
+    getCategoryList: async() => {
+        try {
+            const result = await SubCategory.findAll();
+
+            return result;
+        } catch (err) {
+            console.log('[CategoryService] subCategoryList Error : ', err);
+        }
+    },
+
+    
 
     //ref
     addCategory: async(title) => {
