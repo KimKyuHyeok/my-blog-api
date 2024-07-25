@@ -1,10 +1,10 @@
-import Admin from '@/views/admin/Main.vue';
+import AdminPage from '@/views/admin/AdminPage.vue';
 
 const adminRoutes = [
   {
     path: '/admin',
     name: 'AdminPage',
-    component: Admin,
+    component: AdminPage,
     meta: { requiresAuth: true }
   }
 ];

@@ -12,8 +12,8 @@ const port = 80;
 /* Options */
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:8080',
-    credentials: true
+    origin: 'http://localhost:8080' ,
+    // credentials: true
 }));
 app.set('view engine', 'ejs');
 app.set('views', './views');

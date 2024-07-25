@@ -12,6 +12,8 @@ import axios from 'axios';
 
 const app = createApp(App);
 const bootstrapVue = createBootstrap(app);
+app.use(router);
+app.use(bootstrapVue);
 
 axios.defaults.withCredentials = true;
 
@@ -25,7 +27,6 @@ axios.interceptors.request.use(config => {
     return Promise.reject(error);
 });
 
-app.use(router);
-app.use(bootstrapVue);
+
 
 app.mount(document.body);

@@ -6,7 +6,11 @@ const categoryService = {
     //ref
     getCategoryList: async() => {
         try {
-            const result = await SubCategory.findAll();
+            const result = await SubCategory.findAll({
+                include: {
+                    model: Posts
+                }
+            });
             return result;
         } catch (err) {
             console.log('[CategoryService] subCategoryList Error : ', err)

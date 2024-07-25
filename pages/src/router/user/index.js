@@ -5,19 +5,19 @@ import PasswordConfirm from '@/views/admin/PasswordConfirm';
 
 const userRoutes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/password',
+    name: 'PasswordConfirm',
+    component: PasswordConfirm,
   },
   {
     path: '/posts/:id',
     name: 'PostDetail',
-    component: PostDetail
+    component: PostDetail,
   },
   {
-    path: '/password',
-    name: 'PasswordConfirm',
-    component: PasswordConfirm
+    path: '/',
+    name: 'Home',
+    component: Home,
   },
 ];
 

@@ -40,7 +40,6 @@ export default {
         });
 
         const toggle = (index) => {
-            // 현재 인덱스의 상태를 반전시킴
             activeCategories.value[index] = !activeCategories.value[index];
         }
 
@@ -75,6 +74,7 @@ export default {
         margin-left: 3vh;
         color: rgba(255, 255, 255, 0.5);
         font-size: 12px;
+        white-space: nowrap;
     }
 
     .posts > li > a:hover{
@@ -102,5 +102,9 @@ export default {
         margin-bottom: 10%;
         color: white;
         border-bottom: 1px solid white;
+    }
+
+    .categories {
+        margin-right: 10%;
     }
 </style>
