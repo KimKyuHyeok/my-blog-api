@@ -12,7 +12,7 @@ const port = 8080;
 /* Options */
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost' ,
+    origin: 'http://kyuhyeok.site' ,
     // credentials: true
 }));
 app.set('view engine', 'ejs');
