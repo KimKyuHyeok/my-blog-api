@@ -16,7 +16,7 @@ const adminRouter = Router();
 
 adminRouter.get('/list/category', authenticateJwt, async(req, res) => {
     try {
-        const response = categoryService.getCategoryList();
+        const response = await categoryService.getCategoryList();
 
         res.json(response).status(200).send();
     } catch (err) {
