@@ -9,8 +9,6 @@ const { randomUUID } = require('crypto');
 const path = require('path');
 
 const adminRouter = Router();
-// ref
-
 
 // [API] Category
 

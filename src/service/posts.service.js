@@ -84,6 +84,47 @@ const postsService = {
         } catch (err) {
             console.error(err);
         }
+    },
+
+    categoryAndPosts: async (postId) => {
+        try {
+            const findPost = await Posts.findByPk(postId);
+            const category = await SubCategory.findByPk(findPost.subId);
+
+            const posts = await Posts.findAll({
+                where: {
+                    subId: category.id
+                },
+                order: [
+                    ['createdAt', 'DESC']
+                ],
+                limit: 5
+            })
+
+            const result = {
+                category,
+                posts
+            }
+
+            return result;
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
+    homeCategoryAndPosts: async () => {
+        try {
+            const result = await Posts.findAll({
+                order: [
+                    ['createdAt', 'DESC']
+                ],
+                limit: 5
+            })
+
+            return result;
+        } catch (err) {
+            console.error(err)
+        }
     }
 };
 
