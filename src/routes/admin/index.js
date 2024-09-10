@@ -16,7 +16,7 @@ adminRouter.get('/list/category', authenticateJwt, async(req, res) => {
     try {
         const response = await categoryService.getCategoryList();
 
-        res.json(response).status(200).send();
+        res.json(response).status(200);
     } catch (err) {
         console.log('[API] /api/admin/list/category Error : ', err);
         res.status(400).send('에러가 발생했습니다. : ', err);
@@ -65,7 +65,7 @@ adminRouter.get('/list/post', authenticateJwt, async (req, res) => {
     try {
         const response = await postsService.getPostList();
 
-        res.json(response).status(200).send();
+        res.json(response).status(200);
     } catch (err) {
         console.log('[API] /api/admin/list/post Error : ', err);
     }
@@ -84,16 +84,19 @@ adminRouter.post('/add/post', authenticateJwt, async (req, res) => {
     }
 })
 
-adminRouter.post('/update/post', authenticateJwt, async (req, res) => {
-    const { id, title, content } = req.body;
-
+adminRouter.put('/update/:postId', async(req, res) => {
     try {
-        await postsService.editPost(title, content, id);
+        const postId = req.params.postId;
+        const content = req.body.content;
+        const title = req.body.title;
+        const subId = req.body.subId
 
-        res.status(200).send('게시글 수정 완료');
+        await postsService.postUpdate(postId, content, title, subId);
+
+        res.status(200).send('업로드 완료');
     } catch (err) {
-        console.log('[API] /api/admin/update/post Error : ', err);
-        res.status(400).send('에러가 발생했습니다. : ', err);
+        console.log('[API] /api/post/update/:postId Error : ', err);
+        res.status(400).send('에러가 발생했습니다 : ', err);
     }
 })
 

@@ -36,18 +36,6 @@ const postsService = {
         });
     },
 
-    //ref
-    editPost: async (title, content, postId) => {
-        const post = await Posts.findByPk(postId);
-
-        if (post) {
-            post.title = title;
-            post.content = content;
-            await post.save();
-        } else {
-            console.log("Post 가 없습니다.");
-        }
-    },
 
     getPosts: async () => {
 
@@ -81,6 +69,24 @@ const postsService = {
             const result = await Posts.findAll()
 
             return result;
+        } catch (err) {
+            console.error(err);
+        }
+    },
+
+    postUpdate: async (postId, content, title, subId) => {
+        try {
+            const result = await Posts.update(
+                {
+                    title: title,
+                    content: content,
+                    subId: subId,
+                },
+                {
+                    where: { id: postId }
+                }
+            );
+
         } catch (err) {
             console.error(err);
         }
