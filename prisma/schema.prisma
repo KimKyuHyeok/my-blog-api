@@ -7,18 +7,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+generator fabbrica {
+  provider = "prisma-fabbrica"
+}
+
 model Category {
   id  Int  @id() @default(autoincrement())
   name String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt()
+  Board   Board[]
 }
 
 model Board {
   id  Int  @id() @default(autoincrement())
+  categoryId  Int
+  category  Category  @relation(fields: [categoryId], references: [id])
   title String
   content String
   views Int
+  deleteYn  Boolean @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt()
 }
