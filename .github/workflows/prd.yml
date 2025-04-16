@@ -49,5 +49,5 @@ jobs:
             echo "Pulling the Docker image..."
             docker pull devkyu96/blog:v1
 
-            echo "Running the docker-compose-dev"
-            docker-compose up -d
+            echo "Running the docker-compose up"
+            docker-compose -f docker-compose.yml up -d
