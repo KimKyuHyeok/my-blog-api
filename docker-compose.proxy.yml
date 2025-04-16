@@ -1,0 +1,45 @@
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - letsencrypt:/etc/letsencrypt
+    labels:
+    - "com.github.nginx-proxy.nginx=true"
+    networks:
+      - proxy
+
+  nginx-proxy-acme:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    restart: always
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - acme:/etc/acme.sh
+      - letsencrypt:/etc/letsencrypt
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      DEFAULT_EMAIL: "devkyu96@gmail.com"
+      NGINX_PROXY_CONTAINER: "nginx-proxy"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  certs:
+  html:
+  letsencrypt:
+  acme:
