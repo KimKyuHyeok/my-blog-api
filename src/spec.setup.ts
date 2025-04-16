@@ -3,13 +3,18 @@ import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { AppModule } from '../src/app.module';
 import { PrismaService } from 'nestjs-prisma';
+import { ConfigModule } from '@nestjs/config';
+import supertest from 'supertest';
 
 let app: INestApplication;
 let prisma: PrismaService;
 
 beforeAll(async () => {
   const moduleRef = await Test.createTestingModule({
-    imports: [AppModule],
+    imports: [
+        ConfigModule.forRoot({ isGlobal: true }),
+        AppModule
+    ],
   }).compile();
 
   app = moduleRef.createNestApplication();
@@ -29,4 +34,13 @@ afterAll(async () => {
   await app.close();
 });
 
-export { app, prisma };
+export const request = (url: string, token?: string) => {
+    if (token) {
+        return supertest(app.getHttpServer())
+            .post(url)
+            .set('Authorization', `Bearer ${token}`)
+    }
+
+    return supertest(app.getHttpServer())
+        .post(url)
+}
