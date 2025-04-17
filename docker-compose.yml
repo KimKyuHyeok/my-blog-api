@@ -6,10 +6,10 @@ services:
     environment:
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
-      MYSQL_DB: "${MYSQL_DB_DEV}"
+      MYSQL_DB: "${MYSQL_DB}"
       DB_HOST: "${DB_HOST}"
       DB_PORT: "${DB_PORT}"
-      DATABASE_URL: "mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DB_HOST}:${DB_PORT}/${MYSQL_DB_DEV}"
+      DATABASE_URL: "mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DB_HOST}:${DB_PORT}/${MYSQL_DB}"
       LETSENCRYPT_HOST: "devkyu96.site"
       LETSENCRYPT_EMAIL: devkyu96@gmail.com
     ports:
