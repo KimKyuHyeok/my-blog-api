@@ -1,4 +1,53 @@
-import { Controller } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/config/auth.guard';
+import { BoardService } from './board.service';
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { AdminGuard } from 'src/config/admin.guard';
+import { BoardCreateDto } from './dto/board.create.dto';
+import { BoardUpdateDto } from './dto/board.update.dto';
+import { BoardResponse } from './response/board.response';
+import { BoardDeleteDto } from './dto/board.delete.dto';
 
 @Controller('board')
-export class BoardController {}
+export class BoardController {
+    constructor(private readonly boardService: BoardService) {}
+
+    @UseGuards(JwtAuthGuard, AdminGuard)
+    @Post('/create')
+    create(@Body() dto: BoardCreateDto): Promise<BoardResponse> {
+        return this.boardService.create(dto);
+    }
+
+    @UseGuards(JwtAuthGuard, AdminGuard)
+    @Post('/update')
+    update(@Body() dto: BoardUpdateDto): Promise<BoardResponse> {
+        return this.boardService.update(dto);
+    }
+
+    @UseGuards(JwtAuthGuard, AdminGuard)
+    @Post('/delete')
+    delete(@Body() dto: BoardDeleteDto): Promise<BoardResponse> {
+        return this.boardService.delete(dto);
+    }
+
+    @Get('id')
+    getBoardById(@Query('id') id: string): Promise<BoardResponse> {
+        let boardId = parseInt(id, 10);
+        return this.boardService.findById(boardId)
+    }
+
+    @Get('categoryId')
+    getBoardByCategoryId(@Query('categoryId') id: string): Promise<BoardResponse[]> {
+        let categoryId = parseInt(id, 10);
+        return this.boardService.findByCategoryId(categoryId);
+    }
+
+    @Get('all')
+    getBoardByAll(): Promise<BoardResponse[]> {
+        return this.boardService.findAll();
+    }
+
+    @Get('search')
+    getBoardByKeyword(@Query('keyword') keyword: string): Promise<BoardResponse[]> {
+        return this.boardService.findByKeyword(keyword);
+    }
+}
