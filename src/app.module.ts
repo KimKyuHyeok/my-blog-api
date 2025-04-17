@@ -11,12 +11,13 @@ import { AuthModule } from './auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './auth/jwt.strategy';
+import { PrismaService } from 'nestjs-prisma';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     CategoryModule, BoardModule, AuthModule],
   controllers: [AppController, BoardController, AuthController],
-  providers: [AppService, BoardService, AuthService, JwtService, ConfigService, JwtStrategy],
+  providers: [AppService, BoardService, AuthService, JwtService, ConfigService, JwtStrategy, PrismaService],
 })
 export class AppModule {}
