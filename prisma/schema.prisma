@@ -29,7 +29,7 @@ model Board {
   category  Category  @relation(fields: [categoryId], references: [id])
   title String
   content String
-  views Int
+  views Int @default(0)
   deleteYn  Boolean @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt()
