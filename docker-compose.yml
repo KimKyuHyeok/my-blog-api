@@ -10,6 +10,9 @@ services:
       DB_HOST: "${DB_HOST}"
       DB_PORT: "${DB_PORT}"
       DATABASE_URL: "mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DB_HOST}:${DB_PORT}/${MYSQL_DB}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
+      JWT_SECRET: "${JWT_SECRET}"
+      JWT_EXPIRES_IN: "${JWT_EXPIRES_IN}"
       LETSENCRYPT_HOST: "devkyu96.site"
       LETSENCRYPT_EMAIL: devkyu96@gmail.com
     ports:
