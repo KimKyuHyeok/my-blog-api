@@ -20,9 +20,9 @@ jobs:
           echo DB_PORT=${{ secrets.DB_PORT }} >> .env
           echo DATABASE_URL=mysql://${{ secrets.MYSQL_USER }}:${{ secrets.MYSQL_PASSWORD }}@${{ secrets.DB_HOST }}:${{ secrets.DB_PORT }}/${{ secrets.MYSQL_DB }} >> .env
           echo PORT=80 >> .env
-          echo ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
-          echo JWT_SECRET=${{ secrets.JWT_SECRET }}
-          echo JWT_EXPIRES_IN=${{ secrets.JWT_EXPIRES_IN }}
+          echo ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }} >> .env
+          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
+          echo JWT_EXPIRES_IN=${{ secrets.JWT_EXPIRES_IN }} >> .env
       
       - name: Copy .env to server
         uses: appleboy/scp-action@master
