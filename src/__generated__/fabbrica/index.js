@@ -110,8 +110,7 @@ function isBoardcategoryFactory(x) {
 function autoGenerateBoardScalarsOrEnums({ seq }) {
     return {
         title: (0, internal_1.getScalarFieldValueGenerator)().String({ modelName: "Board", fieldName: "title", isId: false, isUnique: false, seq }),
-        content: (0, internal_1.getScalarFieldValueGenerator)().String({ modelName: "Board", fieldName: "content", isId: false, isUnique: false, seq }),
-        views: (0, internal_1.getScalarFieldValueGenerator)().Int({ modelName: "Board", fieldName: "views", isId: false, isUnique: false, seq })
+        content: (0, internal_1.getScalarFieldValueGenerator)().String({ modelName: "Board", fieldName: "content", isId: false, isUnique: false, seq })
     };
 }
 function defineBoardFactoryInternal({ defaultData: defaultDataResolver, onAfterBuild, onBeforeCreate, onAfterCreate, traits: traitsDefs = {} }, defaultTransientFieldValues) {

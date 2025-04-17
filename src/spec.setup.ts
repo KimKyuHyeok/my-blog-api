@@ -26,7 +26,7 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  const tables = ['Category', 'Board'];
+  const tables = ['Board', 'Category'];
   for (const table of tables) {
     await prisma.$executeRawUnsafe(`DELETE FROM ${table}`);
   }
