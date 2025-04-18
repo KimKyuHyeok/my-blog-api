@@ -36,7 +36,7 @@ jobs:
           source: ".env"
           target: "/home/${{ secrets.SERVER_USER }}"
 
-      - name: Install dependencies
+      - name: Install depende  ncies
         run: npm ci
 
       - name: Build
@@ -68,4 +68,4 @@ jobs:
             docker pull devkyu96/blog:v1
 
             echo "Running the docker-compose up"
-            docker-compose -f docker-compose.yml up -d
+            docker compose -f docker-compose.yml up -d
