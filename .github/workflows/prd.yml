@@ -67,5 +67,8 @@ jobs:
             echo "Pulling the Docker image..."
             docker pull devkyu96/blog:v1
 
+            echo "Stopping and removing existing containers..."
+            docker compose -f docker-compose.yml down --remove-orphans
+
             echo "Running the docker-compose up"
             docker compose -f docker-compose.yml up -d
