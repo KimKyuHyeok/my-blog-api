@@ -23,6 +23,9 @@ jobs:
           echo ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }} >> .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
           echo JWT_EXPIRES_IN=${{ secrets.JWT_EXPIRES_IN }} >> .env
+          echo VIRTUAL_HOST=${{ secrets.VIRTUAL_HOST }} >> .env
+          echo LETSENCRYPT_HOST=${{ secrets.LETSENCRYPT_HOST }} >> .env
+          echo LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }} >> .env
       
       - name: Copy .env to server
         uses: appleboy/scp-action@master
