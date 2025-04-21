@@ -6,6 +6,8 @@ import { BoardCreateDto } from './dto/board.create.dto';
 import { BoardUpdateDto } from './dto/board.update.dto';
 import { BoardResponse } from './response/board.response';
 import { BoardDeleteDto } from './dto/board.delete.dto';
+import { CategoryAndBoardResponse } from './response/category-board.response';
+import { RecentBoard } from './response/recent.board.response';
 
 @Controller('board')
 export class BoardController {
@@ -44,6 +46,16 @@ export class BoardController {
     @Get('all')
     getBoardByAll(): Promise<BoardResponse[]> {
         return this.boardService.findAll();
+    }
+
+    @Get('/all/title')
+    getCategoryAndTitleByAll(): Promise<CategoryAndBoardResponse[]> {
+        return this.boardService.getCategoryAndTitle();
+    }
+
+    @Get('recent')
+    getRecentBoardTitles(): Promise<RecentBoard[]> {
+        return this.boardService.getRecentBoardTitles();
     }
 
     @Get('search')

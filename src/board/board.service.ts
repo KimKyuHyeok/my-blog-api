@@ -5,6 +5,8 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { BoardResponse } from './response/board.response';
 import { PrismaService } from 'nestjs-prisma';
 import { BoardDeleteDto } from './dto/board.delete.dto';
+import { CategoryAndBoardResponse } from './response/category-board.response';
+import { RecentBoard } from './response/recent.board.response';
 
 @Injectable()
 export class BoardService {
@@ -147,6 +149,52 @@ export class BoardService {
         } catch (error) {
             console.error('게시글 검색 실패 : ', error);
             throw new InternalServerErrorException('게시글 검색 중 오류가 발생했습니다.')
+        }
+    }
+
+    async getCategoryAndTitle(): Promise<CategoryAndBoardResponse[]> {
+        try {
+            const categories = await this.prisma.category.findMany({
+                include: {
+                    Board: {
+                        where: { deleteYn: false },
+                        orderBy: { createdAt: 'desc' }
+                    }
+                }
+            })
+
+            const result: CategoryAndBoardResponse[] = categories.map((category) => ({
+                id: category.id,
+                name: category.name,
+                boards: category.Board.map((board) => ({
+                  id: board.id,
+                  title: board.title,
+                })),
+              }));
+
+            return result;
+        } catch (error) {
+            console.error('카테고리 및 게시글 검색 실패 : ', error);
+            throw new InternalServerErrorException('게시글 조회 중 오류가 발생했습니다.');
+        }
+    }
+
+    async getRecentBoardTitles(): Promise<RecentBoard[]> {
+        try {
+            const recentBoards = await this.prisma.board.findMany({
+                where: { deleteYn: false },
+                orderBy: { createdAt: 'desc' },
+                take: 5,
+                select: {
+                  id: true,
+                  title: true,
+                },
+            });
+
+            return recentBoards.map((board) => new RecentBoard(board))
+        } catch (error) {
+            console.error('카테고리 및 게시글 검색 실패 : ', error);
+            throw new InternalServerErrorException('게시글 조회 중 오류가 발생했습니다.');
         }
     }
 }
