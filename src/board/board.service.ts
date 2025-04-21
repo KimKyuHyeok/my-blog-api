@@ -197,4 +197,18 @@ export class BoardService {
             throw new InternalServerErrorException('게시글 조회 중 오류가 발생했습니다.');
         }
     }
+
+    async getRecentBoard(): Promise<BoardResponse> {
+        try {
+            const recentBoard = await this.prisma.board.findFirst({
+                where: { deleteYn: false },
+                orderBy: { createdAt: 'desc' }
+            })
+
+            return new BoardResponse(recentBoard)
+        }  catch (error) {
+            console.error('카테고리 및 게시글 조회 실패 : ', error);
+            throw new InternalServerErrorException('게시글 조회 중 오류가 발생했습니다.');
+        }
+    }
 }

@@ -53,10 +53,17 @@ export class BoardController {
         return this.boardService.getCategoryAndTitle();
     }
 
-    @Get('recent')
+    @Get('recent/boards')
     getRecentBoardTitles(): Promise<RecentBoard[]> {
         return this.boardService.getRecentBoardTitles();
     }
+
+    @Get('recent')
+    getRecentBoard(): Promise<BoardResponse> {
+        return this.boardService.getRecentBoard();
+    }
+
+    
 
     @Get('search')
     getBoardByKeyword(@Query('keyword') keyword: string): Promise<BoardResponse[]> {
