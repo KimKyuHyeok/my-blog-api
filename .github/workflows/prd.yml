@@ -26,6 +26,8 @@ jobs:
           echo VIRTUAL_HOST=${{ secrets.VIRTUAL_HOST }} >> .env
           echo LETSENCRYPT_HOST=${{ secrets.LETSENCRYPT_HOST }} >> .env
           echo LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }} >> .env
+          echo VUE_URL=${{ secrets.VUE_URL }} >> .env
+          echo VUE_TEST_URL=${{ secrets.VUE_TEST_URL }} >> .env
       
       - name: Copy .env to server
         uses: appleboy/scp-action@master
