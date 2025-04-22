@@ -24,4 +24,16 @@ export class AuthService {
 
         return { accessToken };
     }
+
+    validToken(token: string): boolean {
+        try {
+            const secretKey = this.configService.get<string>('JWT_SECRET');
+
+            const decoded = this.jwtService.verify(token, { secret: secretKey });
+
+            return !!decoded;
+        } catch (error) {
+            return false;
+        }
+    }
 }

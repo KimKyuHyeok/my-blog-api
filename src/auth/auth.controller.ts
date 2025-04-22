@@ -9,4 +9,11 @@ export class AuthController {
     login(@Body('password') password: string) {
         return this.authService.login(password);
     }
+
+    @Post('token')
+    validateToken(@Body('token') token: string): { isValid: boolean } {
+        const isValid = this.authService.validToken(token);
+
+        return { isValid };
+    }
 }
