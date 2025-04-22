@@ -21,4 +21,31 @@ describe('auth controller', () => {
         expect(res.status).toBe(401);
         expect(res.body.error).toBe('Unauthorized')
     })
+
+    // When: 검증된 토큰으로 요청을 보내면
+    // Then: true 를 반환한다.
+    it ('Auth Token Validation (Post): When valid token is provided, then return isValid as true.', async () => {
+        const loginRes = await request('/auth/login')
+            .send({ password: process.env.ADMIN_PASSWORD });
+        
+        const validToken = loginRes.body.accessToken;
+
+        const res = await request('/auth/token')
+            .send({ token: validToken })
+
+        expect(res.status).toBe(201)
+        expect(res.body.isValid).toBe(true);
+    })
+
+    // When: 잘못된 토큰으로 요청을 보내면
+    // Then: false 를 반환한다.
+    it('Auth Token Validation (Post): When invalid token is provided, then return isValid as false.', async () => {
+        const invalidToken = 'invalid.jwt.token';
+        
+        const res = await request('/auth/token')
+            .send({ token: invalidToken });
+
+        expect(res.status).toBe(201);
+        expect(res.body.isValid).toBe(false);
+    });
 })
