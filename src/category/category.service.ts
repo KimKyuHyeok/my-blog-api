@@ -64,4 +64,10 @@ export class CategoryService {
         const categories = await this.prisma.category.findMany();
         return categories;
     }
+
+    async findByCategoryId(id: number) {
+        return this.prisma.category.findUnique({
+            where: { id }
+        })
+    }
 }

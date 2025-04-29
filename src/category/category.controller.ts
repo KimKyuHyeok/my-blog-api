@@ -1,5 +1,5 @@
 import { CategoryService } from './category.service';
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/category.create.dto';
 import { JwtAuthGuard } from 'src/config/auth.guard';
 import { AdminGuard } from 'src/config/admin.guard';
@@ -31,5 +31,10 @@ export class CategoryController {
     @Get('/categories')
     findAll() {
         return this.categoryService.findAll();
+    }
+
+    @Get('id')
+    findByCategoryId(@Query('id') id: number) {
+        return this.categoryService.findByCategoryId(id)
     }
 }
