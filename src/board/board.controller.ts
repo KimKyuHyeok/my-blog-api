@@ -63,8 +63,6 @@ export class BoardController {
         return this.boardService.getRecentBoard();
     }
 
-    
-
     @Get('search')
     getBoardByKeyword(@Query('keyword') keyword: string): Promise<BoardResponse[]> {
         return this.boardService.findByKeyword(keyword);

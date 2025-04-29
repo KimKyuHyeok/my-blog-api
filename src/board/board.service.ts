@@ -29,7 +29,7 @@ export class BoardService {
     async update(dto: BoardUpdateDto): Promise<BoardResponse> {
         try {
             const board = await this.prisma.board.update({
-                where: { id: dto.id },
+                where: { id: parseInt(dto.id) },
                 data: { title: dto.title, content: dto.content }
             })
 
@@ -48,7 +48,7 @@ export class BoardService {
     async delete(dto: BoardDeleteDto): Promise<BoardResponse> {
         try {
             const board = await this.prisma.board.update({
-                where: { id: dto.id },
+                where: { id: parseInt(dto.id) },
                 data: { deleteYn: true }
             })
 

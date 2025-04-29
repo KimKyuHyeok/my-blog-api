@@ -2,7 +2,7 @@ import { IsNotEmpty } from "class-validator";
 
 export class BoardUpdateDto {
     @IsNotEmpty()
-    id: number;
+    id: string;
 
     @IsNotEmpty()
     title: string;
